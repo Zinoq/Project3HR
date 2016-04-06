@@ -3164,4 +3164,5 @@ INSERT INTO parkeerautomaten_table VALUES (10001.0,'SINGEL','234',NULL,NULL,NULL
 
 
 -- SELECT SECTOR_D FROM parkeerautomaten_table WHERE SECTOR_D IS NOT NULL;
-SELECT * FROM parkeerautomaten_table;
+--SELECT * FROM parkeerautomaten_table;
+SELECT * FROM parkeerautomaten_table WHERE deelgem ='Noord';
