@@ -1,15 +1,22 @@
-import java.sql.*; //JDBC for databases
-import java.math.*;
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.SQLException;
+
+import java.sql.*;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.SQLException;
+
 
 public class Database {
-    String url = "jdbc:postgresql://localhost:5432/public";
-    String username = "postgres";
-    String password = "Kappa123";
-    Class.forName("org.postgresql.Driver");
 
-    Connection db = DriverManager.getConnection(url, username, password);
+    public static void main(String[] args) {
 
+        try {
+            // connectie met database maken
+            Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost/parkeerautomaten1?"+"user=root&password=Kappa123");
         }
+        catch (Exception a) {
+            a.printStackTrace();
+        }
+
+    }
+}
+
