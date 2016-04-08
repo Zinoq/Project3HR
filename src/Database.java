@@ -1,33 +1,48 @@
 
 import java.sql.*;
+import java.util.ArrayList;
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.SQLException;
 
 
 public class Database {
-    public static void main(String[] args) {
-        try {
-            // connectie met database maken
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/parkeerautomaten1?"+"user=root&password=Kappa123");
+    public Statement myStatement;
+    public ArrayList<String> Results;
 
+    public Database() {
+        // connectie met database maken
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/parkeerautomaten1?" + "user=root&password=Kappa123");
             //Statement maken
             Statement myStatement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-            // Alles binnen de databases selecteren
-            String sqlCommand = "SELECT * FROM markten";
-            ResultSet myResultset = myStatement.executeQuery(sqlCommand);
+    public ArrayList<String> execute(String Query, String Selector) {
+        try {
+//            ResultSet myResultset =
+            ResultSet myResultset = myStatement.executeQuery(Query);
 
             //Process output
             while(myResultset.next()) { //loop door alle resultaten
-                System.out.println(myResultset.getString("straatnaam"));
+                System.out.println(myResultset.getString(Selector));
+                Results.add(myResultset.getString(Selector)); //Alle resultaten worden in een lijst gezet
             }
         }
-        catch (Exception a) {
-            a.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
+        return Results;
+    }
 
+    public static void main(String[] args) {
+        Database Database = new Database();
+        Database.execute("SELECT * FROM markten", "Straatnaam");
     }
 }
 
-//TODO make it so that we can execute sql commands from outside of the main here
+//TODO fix NullPointer error
