@@ -7,25 +7,22 @@ import java.util.ArrayList;
 
 
 public class Database {
-    public Statement myStatement;
-    public ArrayList<String> Results;
+    public Statement myStatement =  null;
+    public ArrayList<String> Results = new ArrayList<String>();
+    public Connection connection;
 
     public Database() {
-        // connectie met database maken
-        Connection connection;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/parkeerautomaten1?" + "user=root&password=Kappa123");
-            //Statement maken
-            Statement myStatement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<String> execute(String Query, String Selector) {
+    private ArrayList<String> execute(String Query, String Selector) {
         try {
-//            ResultSet myResultset =
-            ResultSet myResultset = myStatement.executeQuery(Query);
+            Statement myStatement = connection.createStatement();
+            ResultSet myResultset = myStatement.executeQuery(Query); // hij kent myStatement niet, null pointer regel 29
 
             //Process output
             while(myResultset.next()) { //loop door alle resultaten
