@@ -13,16 +13,11 @@ import javafx.stage.Stage;
 
 
 public class Map extends Application implements MapComponentInitializedListener{
-        MarkerOptions markerOptions;
         GoogleMapView mapView;
         GoogleMap map;
+        static Map Zino;
 
-        public Map() {}
-
-        public void start(Stage stage) throws Exception {
-
-            //Create the JavaFX component and set this as a listener so we know when
-            //the map has been initialized, at which point we can then begin manipulating it.
+        public Map(Stage stage) throws Exception {
             mapView = new GoogleMapView();
             mapView.addMapInializedListener(this);
 
@@ -32,8 +27,15 @@ public class Map extends Application implements MapComponentInitializedListener{
             stage.setScene(scene);
             stage.show();
         }
+        @Override
+        public void start(Stage stage) throws Exception {
+            Map Zino = new Map(stage);
+            //Create the JavaFX component and set this as a listener so we know when
+            //the map has been initialized, at which point we can then begin manipulating it.
+;
+        }
 
-
+        @Override
         public void mapInitialized() {
             //Set the initial properties of the map.
             MapOptions mapOptions = new MapOptions();
@@ -80,8 +82,7 @@ public class Map extends Application implements MapComponentInitializedListener{
             Database.execute("SELECT X_Coord, Y_Coord FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Y_Coord");
             double Y_Coord = Double.parseDouble(Database.getSpecific(1));
             // ^ opvragen x & y coordinaten
-
-
+            Zino.createMarker(X_Coord, Y_Coord, true, "test");
             launch(args);
         }
     }
