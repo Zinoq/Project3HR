@@ -8,13 +8,16 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
 
 public class Map extends Application implements MapComponentInitializedListener{
-
+        MarkerOptions markerOptions;
         GoogleMapView mapView;
         GoogleMap map;
+
+        public Map() {}
 
         public void start(Stage stage) throws Exception {
 
@@ -48,19 +51,37 @@ public class Map extends Application implements MapComponentInitializedListener{
             map = mapView.createMap(mapOptions);
 
             //Add a marker to the map.
+//            MarkerOptions markerOptions = new MarkerOptions();
+//
+//            markerOptions.position( new LatLong(51.917377, 4.483920) )
+//                    .visible(Boolean.TRUE)
+//                    .title("School");
+//
+//            Marker marker = new Marker( markerOptions );
+//
+//            map.addMarker(marker);
+//
+        }
+
+        public void createMarker(double Lat, double Long, Boolean visibility, String title) { // probleem = dat er geen object gemaakt wordt en dus kunnen we dit niet uitvoeren.
             MarkerOptions markerOptions = new MarkerOptions();
 
-            markerOptions.position( new LatLong(51.917377, 4.483920) )
-                    .visible(Boolean.TRUE)
-                    .title("School");
-
+            markerOptions.position( new LatLong(Lat, Long) )
+                    .visible(visibility)
+                    .title(title);
             Marker marker = new Marker( markerOptions );
-
             map.addMarker(marker);
-
         }
 
         public static void main(String[] args) {
+            Database Database = new Database();
+            Database.execute("SELECT X_Coord, Y_Coord FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "X_Coord");
+            double X_Coord = Double.parseDouble(Database.getSpecific(1));
+            Database.execute("SELECT X_Coord, Y_Coord FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Y_Coord");
+            double Y_Coord = Double.parseDouble(Database.getSpecific(1));
+            // ^ opvragen x & y coordinaten
+
+
             launch(args);
         }
     }
