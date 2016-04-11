@@ -78,9 +78,9 @@ public class Map extends Application implements MapComponentInitializedListener{
         public static void main(String[] args) {
             Database Database = new Database();
             Database.execute("SELECT X_Coord, Y_Coord FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "X_Coord");
-            double X_Coord = Double.parseDouble(Database.getSpecific(1));
+            double X_Coord = Double.parseDouble(Database.getSpecific(0));
             Database.execute("SELECT X_Coord, Y_Coord FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Y_Coord");
-            double Y_Coord = Double.parseDouble(Database.getSpecific(1));
+            double Y_Coord = Double.parseDouble(Database.getSpecific(0));
             // ^ opvragen x & y coordinaten
             Zino.createMarker(X_Coord, Y_Coord, true, "test");
             launch(args);
