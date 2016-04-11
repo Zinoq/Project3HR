@@ -49,7 +49,7 @@ public class Map extends Application implements MapComponentInitializedListener{
 
             map = mapView.createMap(mapOptions);
 
-            //Add a marker to the map
+            //Add a marker to the map.
             MarkerOptions markerOptions = new MarkerOptions();
 
             markerOptions.position( new LatLong(51.917377, 4.483920) )
