@@ -10,9 +10,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * Created by Andre on 7-4-2016.
- */
+
 public class Map extends Application implements MapComponentInitializedListener{
 
         GoogleMapView mapView;
