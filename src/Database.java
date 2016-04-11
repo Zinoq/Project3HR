@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 
 public class Database {
-    public Statement myStatement =  null;
     public ArrayList<String> Results = new ArrayList<String>();
     public Connection connection;
 
     public Database() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/parkeerautomaten1?" + "user=root&password=Kappa123");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/standard?" + "user=root&password=Kappa123"); //connectie maken met database
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -22,18 +21,20 @@ public class Database {
     private ArrayList<String> execute(String Query, String Selector) {
         try {
             Statement myStatement = connection.createStatement();
-            ResultSet myResultset = myStatement.executeQuery(Query); // hij kent myStatement niet, null pointer regel 29
+            ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
 
-            //Process output
-            while(myResultset.next()) { //loop door alle resultaten
+            // output
+            while(myResultset.next()) { //loop door alle resultaten als er meerdere zijn
                 System.out.println(myResultset.getString(Selector));
-                Results.add(myResultset.getString(Selector)); //Alle resultaten worden in een lijst gezet
+                Results.add(myResultset.getString(Selector)); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return Results;
+        System.out.println(Results);
+        return Results; // lijst wordt gereturned
+
     }
 
     public static void main(String[] args) {
@@ -42,4 +43,4 @@ public class Database {
     }
 }
 
-//TODO fix NullPointer error
+
