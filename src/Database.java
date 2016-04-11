@@ -24,22 +24,26 @@ public class Database {
             ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
 
             // output
-            while(myResultset.next()) { //loop door alle resultaten als er meerdere zijn
+            while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
                 System.out.println(myResultset.getString(Selector));
                 Results.add(myResultset.getString(Selector)); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         System.out.println(Results);
         return Results; // lijst wordt gereturned
+    }
 
+    private String getSpecific(int index) { //dit is voor als je query meerdere resultaten terug geeft en je wilt een specifieke gebruiken
+        System.out.println(Results.get(index));
+        return Results.get(index);
     }
 
     public static void main(String[] args) {
-        Database Database = new Database();
-        Database.execute("SELECT * FROM markten", "Straatnaam");
+        Database Database = new Database(); // new database object en verbinding met de database maken
+        Database.execute("SELECT * FROM markten", "Straatnaam"); // dit maakt een lijst met resultaten
+        Database.getSpecific(2); // dit selecteerd alleen de 2e straat
     }
 }
 
