@@ -1,22 +1,4 @@
-﻿DROP TABLE IF EXISTS buurtprobleem_fietsendiefstal;
-DROP TABLE IF EXISTS buurtprobleem_diefstal_uit_de_auto;
-DROP TABLE IF EXISTS buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
-DROP TABLE IF EXISTS slachtofferschap_autodiefstal;
-DROP TABLE IF EXISTS slachtofferschap_diefstal_uit_de_auto;
-DROP TABLE IF EXISTS slachtofferschap_diefstal_vanaf_de_auto;
-DROP TABLE IF EXISTS slachtofferschap_fietsendiefstal;
-DROP TABLE IF EXISTS slachtofferschap_overige_diefstal;
-
-DROP TABLE IF EXISTS buurtprobleem_bedreiging;
-DROP TABLE IF EXISTS buurtprobleem_geweldsdelicten;
-DROP TABLE IF EXISTS buurtprobleem_tasjesroof;
-DROP TABLE IF EXISTS slachtofferschap_tasjesroof_met_geweld;
-DROP TABLE IF EXISTS slachtofferschap_tasjesroof_zonder_geweld;
-DROP TABLE IF EXISTS slachtofferschap_bedreiging_met_geweld;
-DROP TABLE IF EXISTS slachtofferschap_mishandeling;
-
-
-
+﻿SET SQL_MODE=ANSI_QUOTES;
 
 CREATE TABLE buurtprobleem_fietsendiefstal (
     wijk VARCHAR(30),
@@ -91,71 +73,6 @@ CREATE TABLE slachtofferschap_overige_diefstal (
 );
 
 
-CREATE TABLE buurtprobleem_bedreiging (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE buurtprobleem_geweldsdelicten (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE buurtprobleem_tasjesroof (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE slachtofferschap_tasjesroof_met_geweld (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE slachtofferschap_tasjesroof_zonder_geweld (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE slachtofferschap_bedreiging_met_geweld (
-    wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-CREATE TABLE slachtofferschap_mishandeling (
-     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
-);
-
-
-
 
 INSERT INTO buurtprobleem_fietsendiefstal VALUES ('Stadsdriehoek/C.S. Kwartier',25.1,22.7,25,22.5,24.2);
 INSERT INTO buurtprobleem_fietsendiefstal VALUES ('Oude Westen',23.1,25.3,29.1,26.6,22.2);
@@ -206,48 +123,6 @@ INSERT INTO slachtofferschap_overige_diefstal VALUES ('Stadscentrum',2.6,3.4,3.3
 INSERT INTO slachtofferschap_overige_diefstal VALUES ('Rotterdam',2.6,3.7,3.3,3,3.2);
 
 
-INSERT INTO buurtprobleem_bedreiging VALUES ('Stadsdriehoek/C.S. Kwartier',5.8,3.2,5.4,3.4,6.2);
-INSERT INTO buurtprobleem_bedreiging VALUES ('Oude Westen',3.7,5.3,9.6,10.1,7.3);
-INSERT INTO buurtprobleem_bedreiging VALUES ('Cool/Nieuwe Werk/Dijkzigt',7,6.1,4.9,8.1,4.3);
-INSERT INTO buurtprobleem_bedreiging VALUES ('Stadscentrum',5.1,4.5,6.7,6.5,6.1);
-INSERT INTO buurtprobleem_bedreiging VALUES ('Rotterdam',3.3,3.1,4.5,4.8,5.8);
-
-INSERT INTO buurtprobleem_geweldsdelicten VALUES ('Stadsdriehoek/C.S. Kwartier',5.2,4,6.2,3.9,4.1);
-INSERT INTO buurtprobleem_geweldsdelicten VALUES ('Oude Westen',7.7,10.7,16.7,11.7,5.6);
-INSERT INTO buurtprobleem_geweldsdelicten VALUES ('Cool/Nieuwe Werk/Dijkzigt',5.9,5,4.8,11.4,4.4);
-INSERT INTO buurtprobleem_geweldsdelicten VALUES ('Stadscentrum',5.8,6.4,9.3,8,4.6);
-INSERT INTO buurtprobleem_geweldsdelicten VALUES ('Rotterdam',3.9,3.7,4.6,4.7,5.9);
-
-INSERT INTO buurtprobleem_tasjesroof VALUES ('Stadsdriehoek/C.S. Kwartier',5.9,4.8,5.8,2.2,4.4);
-INSERT INTO buurtprobleem_tasjesroof VALUES ('Oude Westen',5.5,5.3,10.2,5.3,4.8);
-INSERT INTO buurtprobleem_tasjesroof VALUES ('Cool/Nieuwe Werk/Dijkzigt',6.7,3.9,5.2,4.7,5.9);
-INSERT INTO buurtprobleem_tasjesroof VALUES ('Stadscentrum',5.9,4.8,7.2,3.7,4.8);
-INSERT INTO buurtprobleem_tasjesroof VALUES ('Rotterdam',3.2,2.8,3.4,3,3.4);
-
-INSERT INTO slachtofferschap_tasjesroof_met_geweld VALUES ('Stadsdriehoek/C.S. Kwartier',1.3,0,0,0.4,0.3);
-INSERT INTO slachtofferschap_tasjesroof_met_geweld VALUES ('Oude Westen',0.7,1,0,0,0);
-INSERT INTO slachtofferschap_tasjesroof_met_geweld VALUES ('Cool/Nieuwe Werk/Dijkzigt',0.5,1.2,0,0.6,0.5);
-INSERT INTO slachtofferschap_tasjesroof_met_geweld VALUES ('Stadscentrum',0.9,0.6,0.3,0.3,0.2);
-INSERT INTO slachtofferschap_tasjesroof_met_geweld VALUES ('Rotterdam',0.5,0.5,0.3,0.2,0.2);
-
-INSERT INTO slachtofferschap_tasjesroof_zonder_geweld VALUES ('Stadsdriehoek/C.S. Kwartier',1.6,4,1.7,1.6,1.4);
-INSERT INTO slachtofferschap_tasjesroof_zonder_geweld VALUES ('Oude Westen',1.9,1,1.9,2.1,1.6);
-INSERT INTO slachtofferschap_tasjesroof_zonder_geweld VALUES ('Cool/Nieuwe Werk/Dijkzigt',3.5,2.7,2,2.6,1.2);
-INSERT INTO slachtofferschap_tasjesroof_zonder_geweld VALUES ('Stadscentrum',2.2,2.7,1.8,2,1.4);
-INSERT INTO slachtofferschap_tasjesroof_zonder_geweld VALUES ('Rotterdam',1.3,1.3,1.3,1.2,1.2);
-
-INSERT INTO slachtofferschap_bedreiging_met_geweld VALUES ('Stadsdriehoek/C.S. Kwartier',4.3,2.8,3,3.8,3.6);
-INSERT INTO slachtofferschap_bedreiging_met_geweld VALUES ('Oude Westen',3.4,4.9,2.2,3.3,2.2);
-INSERT INTO slachtofferschap_bedreiging_met_geweld VALUES ('Cool/Nieuwe Werk/Dijkzigt',4.3,4.3,4.7,2.7,1.5);
-INSERT INTO slachtofferschap_bedreiging_met_geweld VALUES ('Stadscentrum',4,3.8,3.1,3.4,2.7);
-INSERT INTO slachtofferschap_bedreiging_met_geweld VALUES ('Rotterdam',2.8,2.6,2.8,2.9,3.1);
-
-INSERT INTO slachtofferschap_mishandeling VALUES ('Stadsdriehoek/C.S. Kwartier',1,1.7,0.6,0.6,0.5);
-INSERT INTO slachtofferschap_mishandeling VALUES ('Oude Westen',0.8,0,1.3,0.2,0.6);
-INSERT INTO slachtofferschap_mishandeling VALUES ('Cool/Nieuwe Werk/Dijkzigt',0.5,1.1,1.1,1.1,0.9);
-INSERT INTO slachtofferschap_mishandeling VALUES ('Stadscentrum',0.9,1,0.9,0.6,0.6);
-INSERT INTO slachtofferschap_mishandeling VALUES ('Rotterdam',0.4,0.5,0.8,0.4,0.8);
-
 
 
 
@@ -259,11 +134,3 @@ SELECT * FROM slachtofferschap_diefstal_uit_de_auto;
 SELECT * FROM slachtofferschap_diefstal_vanaf_de_auto;
 SELECT * FROM slachtofferschap_fietsendiefstal;
 SELECT * FROM slachtofferschap_overige_diefstal;
-
-SELECT * FROM buurtprobleem_bedreiging;
-SELECT * FROM buurtprobleem_geweldsdelicten;
-SELECT * FROM buurtprobleem_tasjesroof;
-SELECT * FROM slachtofferschap_tasjesroof_met_geweld;
-SELECT * FROM slachtofferschap_tasjesroof_zonder_geweld;
-SELECT * FROM slachtofferschap_bedreiging_met_geweld;
-SELECT * FROM slachtofferschap_mishandeling;
