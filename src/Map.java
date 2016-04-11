@@ -50,15 +50,15 @@ public class Map extends Application implements MapComponentInitializedListener{
             map = mapView.createMap(mapOptions);
 
             //Add a marker to the map
-//            MarkerOptions markerOptions = new MarkerOptions();
-//
-//            markerOptions.position( new LatLong(47.6, -122.3) )
-//                    .visible(Boolean.TRUE)
-//                    .title("My Marker");
-//
-//            Marker marker = new Marker( markerOptions );
-//
-//            map.addMarker(marker);
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            markerOptions.position( new LatLong(51.917377, 4.483920) )
+                    .visible(Boolean.TRUE)
+                    .title("School");
+
+            Marker marker = new Marker( markerOptions );
+
+            map.addMarker(marker);
 
         }
 
