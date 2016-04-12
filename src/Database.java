@@ -21,7 +21,7 @@ public class Database {
     }
 
     public String execute(String Query, String Selector) {
-        try {
+            try {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
 
@@ -43,7 +43,7 @@ public class Database {
         return List.get(index);
     }
 
-    public ArrayList<Double> getMarkerLong() {
+    public ArrayList<Double> getMarkerLat() {
         try {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery("SELECT X_Coord FROM standard.parkeerautomaten");
@@ -58,9 +58,9 @@ public class Database {
         }
         //        System.out.println(Results);
         return XLong;
-    } //TODO FIX
+    }
 
-    public ArrayList<Double> getMarkerLat() {
+    public ArrayList<Double> getMarkerLong() {
         try {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery("SELECT Y_Coord FROM standard.parkeerautomaten");
