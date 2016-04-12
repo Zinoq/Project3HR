@@ -57,7 +57,7 @@ public class Map extends Application implements MapComponentInitializedListener{
             //Add a marker to the map.
             MarkerOptions markerOptions = new MarkerOptions();
 
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < 1000; i++) {
                 map.addMarker(new Marker(markerOptions.position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
                         .visible(Boolean.TRUE)
                         .title("test")));

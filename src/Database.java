@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Database {
-    public String Result;
+    public ArrayList<String> Result = new ArrayList<>();
     public Connection connection;
     public ArrayList<Double> XLong = new ArrayList<>();
     public ArrayList<Double> YLat = new ArrayList<>();
@@ -19,28 +19,33 @@ public class Database {
             e.printStackTrace();
         }
     }
+//
+//    public String singleExecute(String Query) {
+//        try {
+//            Statement myStatement = connection.createStatement();
+//            ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
+//            while (myResultset.next()) {
+//               myResultset.getString();
+//
+//            }
+//        }
+//         catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-    public String execute(String Query, String Selector) {
-            try {
+    public ArrayList<String> execute(String Query, String Selector) {
+        try {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
-
-            // output
-            while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
-//                System.out.println(myResultset.getString(Selector));
-                System.out.println(myResultset.getString(Selector));
-                Result = myResultset.getString(Selector);
-                return myResultset.getString(Selector); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+            while (myResultset.next()) {
+                Result.add(myResultset.getString(Selector));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return Result;
-    }
-
-    public String getSpecific(ArrayList<String> List, int index) { //dit is voor als je query meerdere resultaten terug geeft en je wilt een specifieke gebruiken
-//        System.out.println(Results.get(index));
-        return List.get(index);
     }
 
     public ArrayList<Double> getMarkerLat() {
