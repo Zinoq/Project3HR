@@ -50,8 +50,8 @@ public class Database {
 
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
-                //                System.out.println(myResultset.getString(Selector));
-                XLong.add(Double.valueOf(myResultset.getString("X_Coord"))); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+//                System.out.println(myResultset.getDouble("X_Coord"));
+                XLong.add(myResultset.getDouble("X_Coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,8 +67,8 @@ public class Database {
 
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
-                //                System.out.println(myResultset.getString(Selector));
-                XLong.add(java.lang.Double.valueOf(myResultset.getString("Y_Coord"))); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+//                System.out.println(myResultset.getDouble("Y_Coord"));
+                YLat.add(myResultset.getDouble("Y_Coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,8 +79,10 @@ public class Database {
 
     public static void main(String[] args) {
         Database Database = new Database(); // new database object en verbinding met de database maken
-        Database.execute("SELECT Inventarisnr, Deelgem FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Inventarisnr"); // dit maakt een lijst met resultaten
+//        Database.execute("SELECT Inventarisnr, Deelgem FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Inventarisnr"); // dit maakt een lijst met resultaten
 //        Database.getSpecific(Results, 2); // dit selecteerd alleen de 2e straat
+        System.out.println(Database.getMarkerLong().get(2));
+        System.out.println(Database.getMarkerLat().get(2));
     }
 }
 
