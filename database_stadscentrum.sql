@@ -1,75 +1,83 @@
-﻿SET SQL_MODE=ANSI_QUOTES;
+﻿
+DROP TABLE IF EXISTS buurtprobleem_fietsendiefstal;
+DROP TABLE IF EXISTS buurtprobleem_diefstal_uit_de_auto;
+DROP TABLE IF EXISTS buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
+DROP TABLE IF EXISTS slachtofferschap_autodiefstal;
+DROP TABLE IF EXISTS slachtofferschap_diefstal_uit_de_auto;
+DROP TABLE IF EXISTS slachtofferschap_diefstal_vanaf_de_auto;
+DROP TABLE IF EXISTS slachtofferschap_fietsendiefstal;
+DROP TABLE IF EXISTS slachtofferschap_overige_diefstal;
 
 CREATE TABLE buurtprobleem_fietsendiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE buurtprobleem_diefstal_uit_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_autodiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_diefstal_uit_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_diefstal_vanaf_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_fietsendiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_overige_diefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 
@@ -126,11 +134,3 @@ INSERT INTO slachtofferschap_overige_diefstal VALUES ('Rotterdam',2.6,3.7,3.3,3,
 
 
 
-SELECT * FROM buurtprobleem_fietsendiefstal;
-SELECT * FROM buurtprobleem_diefstal_uit_de_auto;
-SELECT * FROM buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
-SELECT * FROM slachtofferschap_autodiefstal;
-SELECT * FROM slachtofferschap_diefstal_uit_de_auto;
-SELECT * FROM slachtofferschap_diefstal_vanaf_de_auto;
-SELECT * FROM slachtofferschap_fietsendiefstal;
-SELECT * FROM slachtofferschap_overige_diefstal;
