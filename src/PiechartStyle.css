@@ -1,0 +1,10 @@
+.chart {
+    -fx-width: 800px;
+    -fx-height: 800px;
+}
+
+.chart-legend {
+    -fx-background-color: white;
+    -fx-border-style: solid black;
+    -fx-border-width: 5px;
+}
