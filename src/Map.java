@@ -1,11 +1,6 @@
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.javascript.object.MapOptions;
-import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
-import com.lynden.gmapsfx.javascript.object.Marker;
-import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import com.lynden.gmapsfx.javascript.object.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -53,11 +48,10 @@ public class Map extends Application implements MapComponentInitializedListener{
 
             map = mapView.createMap(mapOptions);
 
-
             //Add a marker to the map.
             MarkerOptions markerOptions = new MarkerOptions();
 
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 500; i++) {
                 map.addMarker(new Marker(markerOptions.position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
                         .visible(Boolean.TRUE)
                         .title("test")));
