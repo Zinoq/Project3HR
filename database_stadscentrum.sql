@@ -134,3 +134,11 @@ INSERT INTO slachtofferschap_overige_diefstal VALUES ('Rotterdam',2.6,3.7,3.3,3,
 
 
 
+SELECT * FROM buurtprobleem_fietsendiefstal;
+SELECT * FROM buurtprobleem_diefstal_uit_de_auto;
+SELECT * FROM buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
+SELECT * FROM slachtofferschap_autodiefstal;
+SELECT * FROM slachtofferschap_diefstal_uit_de_auto;
+SELECT * FROM slachtofferschap_diefstal_vanaf_de_auto;
+SELECT * FROM slachtofferschap_fietsendiefstal;
+SELECT * FROM slachtofferschap_overige_diefstal;
