@@ -51,12 +51,12 @@ public class Database {
     public ArrayList<Double> getMarkerLat() {
         try {
             Statement myStatement = connection.createStatement();
-            ResultSet myResultset = myStatement.executeQuery("SELECT X_Coord FROM standard.parkeerautomaten");
+            ResultSet myResultset = myStatement.executeQuery("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL");
 
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
 //                System.out.println(myResultset.getDouble("X_Coord"));
-                XLong.add(myResultset.getDouble("X_Coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+                XLong.add(myResultset.getDouble("Latitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,12 +68,12 @@ public class Database {
     public ArrayList<Double> getMarkerLong() {
         try {
             Statement myStatement = connection.createStatement();
-            ResultSet myResultset = myStatement.executeQuery("SELECT Y_Coord FROM standard.parkeerautomaten");
+            ResultSet myResultset = myStatement.executeQuery("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL");
 
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
 //                System.out.println(myResultset.getDouble("Y_Coord"));
-                YLat.add(myResultset.getDouble("Y_Coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+                YLat.add(myResultset.getDouble("Longitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
