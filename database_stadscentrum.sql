@@ -136,6 +136,16 @@ CREATE TABLE slachtofferschap_mishandeling (
 );
 
 
+CREATE TABLE tevredenheid_met_het_wonen_in_de_buurt (
+     wijk VARCHAR(30),
+    "2006" NUMERIC(3, 1),
+    "2007" NUMERIC(3, 1),
+    "2008" NUMERIC(3, 1),
+    "2009" NUMERIC(3, 1),
+    "2011" NUMERIC(3, 1)
+);
+
+
 
 
 INSERT INTO buurtprobleem_fietsendiefstal VALUES ('Stadsdriehoek/C.S. Kwartier',25.1,22.7,25,22.5,24.2);
@@ -230,6 +240,14 @@ INSERT INTO slachtofferschap_mishandeling VALUES ('Stadscentrum',0.9,1,0.9,0.6,0
 INSERT INTO slachtofferschap_mishandeling VALUES ('Rotterdam',0.4,0.5,0.8,0.4,0.8);
 
 
+INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Stadsdriehoek/C.S. Kwartier',89.6,90.8,81.8,77.6,87.2);
+INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Oude Westen',74.1,69.8,63.6,60.9,76);
+INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Cool/Nieuwe Werk/Dijkzigt',86.7,87.9,81.5,79.2,83.6);
+INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Stadscentrum',84.4,83.1,75.7,72.5,82.9);
+INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Rotterdam',79.4,79.9,75,73.4,74.4);
+
+
+
 
 SELECT * FROM buurtprobleem_fietsendiefstal;
 SELECT * FROM buurtprobleem_diefstal_uit_de_auto;
@@ -247,3 +265,5 @@ SELECT * FROM slachtofferschap_tasjesroof_met_geweld;
 SELECT * FROM slachtofferschap_tasjesroof_zonder_geweld;
 SELECT * FROM slachtofferschap_bedreiging_met_geweld;
 SELECT * FROM slachtofferschap_mishandeling;
+
+SELECT * FROM tevredenheid_met_het_wonen_in_de_buurt;
