@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.scene.chart.*;
 import javafx.scene.Group;
 
-import java.io.File;
 
 public class Piechart extends Application {
     Database Database = new Database();
