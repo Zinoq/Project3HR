@@ -1,148 +1,163 @@
-﻿﻿SET SQL_MODE=ANSI_QUOTES;
+﻿﻿drop table if exists buurtprobleem_fietsendiefstal;
+drop table if exists buurtprobleem_diefstal_uit_de_auto;
+drop table if exists buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
+drop table if exists slachtofferschap_autodiefstal;
+drop table if exists slachtofferschap_diefstal_uit_de_auto;
+drop table if exists slachtofferschap_diefstal_vanaf_de_auto;
+drop table if exists slachtofferschap_fietsendiefstal ;
+drop table if exists slachtofferschap_overige_diefstal;
+drop table if exists buurtprobleem_bedreiging;
+drop table if exists buurtprobleem_geweldsdelicten;
+drop table if exists buurtprobleem_tasjesroof;
+drop table if exists slachtofferschap_tasjesroof_met_geweld;
+drop table if exists slachtofferschap_tasjesroof_zonder_geweld;
+drop table if exists slachtofferschap_bedreiging_met_geweld;
+drop table if exists slachtofferschap_mishandeling;
+drop table if exists tevredenheid_met_het_wonen_in_de_buurt;
 
 CREATE TABLE buurtprobleem_fietsendiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE buurtprobleem_diefstal_uit_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_autodiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_diefstal_uit_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_diefstal_vanaf_de_auto (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 CREATE TABLE slachtofferschap_fietsendiefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_overige_diefstal (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE buurtprobleem_bedreiging (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE buurtprobleem_geweldsdelicten (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE buurtprobleem_tasjesroof (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_tasjesroof_met_geweld (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_tasjesroof_zonder_geweld (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_bedreiging_met_geweld (
     wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 CREATE TABLE slachtofferschap_mishandeling (
      wijk VARCHAR(30),
-    "2006" NUMERIC(2, 1),
-    "2007" NUMERIC(2, 1),
-    "2008" NUMERIC(2, 1),
-    "2009" NUMERIC(2, 1),
-    "2011" NUMERIC(2, 1)
+    year_2006 NUMERIC(2, 1),
+    year_2007 NUMERIC(2, 1),
+    year_2008 NUMERIC(2, 1),
+    year_2009 NUMERIC(2, 1),
+    year_2011 NUMERIC(2, 1)
 );
 
 
 CREATE TABLE tevredenheid_met_het_wonen_in_de_buurt (
      wijk VARCHAR(30),
-    "2006" NUMERIC(3, 1),
-    "2007" NUMERIC(3, 1),
-    "2008" NUMERIC(3, 1),
-    "2009" NUMERIC(3, 1),
-    "2011" NUMERIC(3, 1)
+    year_2006 NUMERIC(3, 1),
+    year_2007 NUMERIC(3, 1),
+    year_2008 NUMERIC(3, 1),
+    year_2009 NUMERIC(3, 1),
+    year_2011 NUMERIC(3, 1)
 );
 
 
@@ -249,21 +264,3 @@ INSERT INTO tevredenheid_met_het_wonen_in_de_buurt VALUES ('Rotterdam',79.4,79.9
 
 
 
-SELECT * FROM buurtprobleem_fietsendiefstal;
-SELECT * FROM buurtprobleem_diefstal_uit_de_auto;
-SELECT * FROM buurtprobleem_beschadiging_aan_of_diefstal_vanaf_de_auto;
-SELECT * FROM slachtofferschap_autodiefstal;
-SELECT * FROM slachtofferschap_diefstal_uit_de_auto;
-SELECT * FROM slachtofferschap_diefstal_vanaf_de_auto;
-SELECT * FROM slachtofferschap_fietsendiefstal;
-SELECT * FROM slachtofferschap_overige_diefstal;
-
-SELECT * FROM buurtprobleem_bedreiging;
-SELECT * FROM buurtprobleem_geweldsdelicten;
-SELECT * FROM buurtprobleem_tasjesroof;
-SELECT * FROM slachtofferschap_tasjesroof_met_geweld;
-SELECT * FROM slachtofferschap_tasjesroof_zonder_geweld;
-SELECT * FROM slachtofferschap_bedreiging_met_geweld;
-SELECT * FROM slachtofferschap_mishandeling;
-
-SELECT * FROM tevredenheid_met_het_wonen_in_de_buurt;

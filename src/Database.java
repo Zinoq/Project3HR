@@ -86,8 +86,9 @@ public class Database {
         Database Database = new Database(); // new database object en verbinding met de database maken
 //        Database.execute("SELECT Inventarisnr, Deelgem FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Inventarisnr"); // dit maakt een lijst met resultaten
 //        Database.getSpecific(Results, 2); // dit selecteerd alleen de 2e straat
-        System.out.println(Database.getMarkerLong().get(2));
-        System.out.println(Database.getMarkerLat().get(2));
+//        System.out.println(Database.getMarkerLong().get(2));
+//        System.out.println(Database.getMarkerLat().get(2));
+        System.out.println(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Stadsdriehoek/C.S. Kwartier';", "year_2006").get(0));
     }
 }
 
