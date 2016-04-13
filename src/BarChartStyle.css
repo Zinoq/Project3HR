@@ -1,0 +1,12 @@
+.chart-bar {
+	-fx-margin-left: 50px;
+	-fx-margin-right: 50px;
+}
+
+.data5.chart-bar {
+	-fx-padding-right: 10px;
+}
+
+.data1.chart-bar {
+	-fx-padding-left: 10px;
+}
