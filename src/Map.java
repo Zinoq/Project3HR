@@ -1,18 +1,21 @@
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.UIEventHandler;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
+import com.lynden.gmapsfx.shapes.Circle;
+import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
+import jdk.nashorn.api.scripting.JSObject;
 
 public class Map extends Application implements MapComponentInitializedListener{
         GoogleMapView mapView;
         GoogleMap map;
         Database Database;
         Scene scene;
-
 
         public Map(){
             //Create the JavaFX component and set this as a listener so we know when
@@ -49,15 +52,40 @@ public class Map extends Application implements MapComponentInitializedListener{
             map = mapView.createMap(mapOptions);
 
             //Add a marker to the map.
-            MarkerOptions markerOptions = new MarkerOptions();
 
-            for (int i = 0; i < 500; i++) {
-                map.addMarker(new Marker(markerOptions.position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
-                        .visible(Boolean.TRUE)
-                        .title("test")));
+
+
+            for (int i = 0; i < 11; i++) {
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
+                        .animation(Animation.DROP);
+
+                Marker marker = new Marker(markerOptions);
+                map.addMarker(marker);
+
+
+                //Add an info window to a marker
+                InfoWindowOptions infoOptions = new InfoWindowOptions();
+                infoOptions.content(Database.execute("SELECT Plaats FROM standard.markten WHERE Plaats IS NOT NULL", "Plaats").get(i))
+                        .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)));
+                InfoWindow window = new InfoWindow(infoOptions);
+
+                map.addUIEventHandler(marker, UIEventType.click, (netscape.javascript.JSObject obj) -> {
+                    for (int j = 0; j < 11; j++) {
+                        window.open(map, new Marker(markerOptions.position(new LatLong(Database.getMarkerLat().get(j), Database.getMarkerLong().get(j)))));
+                    }});
+
+                CircleOptions rcircleoptions = new CircleOptions()
+                        .center(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
+                                .radius(1000)
+                                .strokeColor("red")
+                                .strokeWeight(2)
+                                .fillColor("red")
+                                .fillOpacity(0.3);
+                Circle rcircle = new Circle(rcircleoptions);
+                map.addMapShape(rcircle);
+                }
             }
-        }
-
 
         public static void main(String[] args) {
             launch(args);
