@@ -29,7 +29,7 @@ public class Piechart extends Application {
         @Override public void start(Stage stage) {
             Scene scene = new Scene(new Group());
             scene.getStylesheets().add(css);
-            stage.setTitle("Test");
+            stage.setTitle("Aantal parkeerautomaten per regio");
             stage.setWidth(800);
             stage.setHeight(800);
 
@@ -60,7 +60,7 @@ public class Piechart extends Application {
                             @Override public void handle(MouseEvent e) {
                                 caption.setTranslateX(e.getSceneX());
                                 caption.setTranslateY(e.getSceneY());
-                                caption.setText(String.valueOf(data.getPieValue()) + "Stuks");
+                                caption.setText(String.valueOf(data.getPieValue()) + "");
                                 caption.setVisible(true);
                             }
                         });
@@ -70,6 +70,7 @@ public class Piechart extends Application {
             stage.show();
         }
         public static void main(String[] args) {
+
             launch(args);
         }
     }

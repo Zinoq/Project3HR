@@ -24,6 +24,7 @@ public class Barchart extends Application {
         yAxis.setLabel("Percentage");
         bc.setTitle("Tevredenheid bevolking per regio");
 
+
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2006");
         series1.getData().add(new XYChart.Data(Stadsdriehoek, Double.parseDouble(Database2.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Stadsdriehoek/C.S. Kwartier';", "year_2006").get(0))));
