@@ -12,6 +12,8 @@ public class Barchart extends Application {
     String Rotterdam = "Rotterdam";
     String css = this.getClass().getResource("/BarChartStyle.css").toExternalForm();
 
+    public Scene scene;
+
     @Override public void start(Stage stage) {
 
         stage.setTitle("Tevredenheid bevolking per regio");
@@ -21,7 +23,6 @@ public class Barchart extends Application {
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Percentage");
         bc.setTitle("Tevredenheid bevolking per regio");
-
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2006");
@@ -64,7 +65,7 @@ public class Barchart extends Application {
         series5.getData().add(new XYChart.Data(Rotterdam, Double.parseDouble(Database2.execute("SELECT year_2011 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Rotterdam';", "year_2011").get(24))));
 
 
-        Scene scene  = new Scene(bc,1200,800);
+        scene  = new Scene(bc,1200,800);
         scene.getStylesheets().add(css);
         bc.getData().addAll(series1, series2, series3, series4, series5);
         stage.setScene(scene);
