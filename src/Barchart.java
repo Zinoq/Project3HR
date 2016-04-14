@@ -12,6 +12,7 @@ public class Barchart extends Application {
     String Rotterdam = "Rotterdam";
     String css = this.getClass().getResource("/BarChartStyle.css").toExternalForm();
 
+
     @Override public void start(Stage stage) {
 
         stage.setTitle("Tevredenheid bevolking per regio");
@@ -21,6 +22,8 @@ public class Barchart extends Application {
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Percentage");
         bc.setTitle("Tevredenheid bevolking per regio");
+
+
 
 
         XYChart.Series series1 = new XYChart.Series();
