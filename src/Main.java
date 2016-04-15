@@ -16,7 +16,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    Stage window;
+    Stage window1, window2;
+
+    Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
+
+    // we moeten in alle charts een constructor maken met eigenlijk alles daar in, zodat we hier een object kunnen maken en daarmee de scene kunnen aanroepen
     Scene menuscene, grafscene, mapscene;
 
     public static void main(String[] args) {
@@ -25,16 +29,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        window = primaryStage;
+        window1 = primaryStage;
+        window2 = new Stage();
+        window2.setScene(TasjesDiefstalChart.getSceneDiefstal());
 
         //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
         Button grafbut = new Button("Grafieken"); // grafiek button
-        grafbut.setOnAction(e -> window.setScene(grafscene)); // gaat naar het scherm met grafieken
+        grafbut.setOnAction(e -> window1.setScene(grafscene)); // gaat naar het scherm met grafieken
         Button mapbut = new Button("markten map"); // market/parkeerautomaten button
-        mapbut.setOnAction(e -> window.setScene(mapscene)); // gaat naar het scherm met de map
+        mapbut.setOnAction(e -> window1.setScene(mapscene)); // gaat naar het scherm met de map
         Button quit = new Button("quit"); // quit button
-        quit.setOnAction(e -> window.close());
+        quit.setOnAction(e -> window1.close());
 
         mainmenu.getChildren().addAll(grafbut, mapbut, quit);
         mainmenu.setAlignment(Pos.CENTER);
@@ -43,11 +49,11 @@ public class Main extends Application {
         // grafieken screen
         VBox grafVbox = new VBox(15); //layout
         Button grafiek1 = new Button("grafiek1"); // (Barchart)
-        grafiek1.setOnAction(e -> Barchart.main());
+        grafiek1.setOnAction(e -> window2.showAndWait());
 
         Button backbut1 = new Button("Terug naar menu"); // back to main menu button
         GridPane.setConstraints(backbut1, 0, 5);
-        backbut1.setOnAction(e -> window.setScene(menuscene)); //action of the button
+        backbut1.setOnAction(e -> window1.setScene(menuscene)); //action of the button
 
         grafVbox.getChildren().addAll(grafiek1, backbut1);
         grafVbox.setAlignment(Pos.CENTER);
@@ -88,7 +94,7 @@ public class Main extends Application {
 
         Button backbut2 = new Button("Terug naar menu"); // back to main menu button
         GridPane.setConstraints(backbut2, 0, 5);
-        backbut2.setOnAction(e -> window.setScene(menuscene)); //action of the button
+        backbut2.setOnAction(e -> window1.setScene(menuscene)); //action of the button
 
         grid.getChildren().addAll(daylabel, choiceday, marklabel, choicemarkt, radlabel, radinput, radConfirm, backbut2);
         mapscene = new Scene(grid, 1280, 720); //application window
