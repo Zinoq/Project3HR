@@ -1,25 +1,25 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class Barchart extends Application {
-    Database Database2 = new Database();
-    String Stadsdriehoek = "Stadsdriehoek/C.S. Kwartier";
-    String OudeWesten = "Oude Westen";
-    String Dijkzigt = "Cool/Nieuwe, Werk/Dijkzigt";
-    String Stadscentrum = "Stadscentrum";
-    String Rotterdam = "Rotterdam";
-    String css = this.getClass().getResource("/BarChartStyle.css").toExternalForm();
+public class Barchart_Tevredenheid {
 
-    public Scene scene;
+    public Barchart_Tevredenheid() {}
 
-    @Override public void start(Stage stage) {
+    public Scene getSceneBarchart() {
+        Database Database2 = new Database();
+        String Stadsdriehoek = "Stadsdriehoek/C.S. Kwartier";
+        String OudeWesten = "Oude Westen";
+        String Dijkzigt = "Cool/Nieuwe, Werk/Dijkzigt";
+        String Stadscentrum = "Stadscentrum";
+        String Rotterdam = "Rotterdam";
+        String css = this.getClass().getResource("/BarChartStyle.css").toExternalForm();
 
-        stage.setTitle("Tevredenheid bevolking per regio");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> bc = new BarChart<String, Number>(xAxis,yAxis);
+        final BarChart<String, Number> bc = new BarChart<String, Number>(xAxis, yAxis);
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Percentage");
         bc.setTitle("Tevredenheid bevolking per regio");
@@ -66,14 +66,10 @@ public class Barchart extends Application {
         series5.getData().add(new XYChart.Data(Rotterdam, Double.parseDouble(Database2.execute("SELECT year_2011 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Rotterdam';", "year_2011").get(24))));
 
 
-        scene  = new Scene(bc,1200,800);
+        Scene scene = new Scene(bc, 1280, 720);
         scene.getStylesheets().add(css);
         bc.getData().addAll(series1, series2, series3, series4, series5);
-        stage.setScene(scene);
-        stage.show();
-    }
 
-    public static void main(String[] args) {
-        launch(args);
+        return scene;
     }
 }

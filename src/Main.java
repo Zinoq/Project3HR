@@ -16,9 +16,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    Stage window1, window2;
+    Stage window1, window2, window3, window4, window5;
 
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
+    Barchart_Tevredenheid BarchartTevredenheid = new Barchart_Tevredenheid();
+    Linechart_Fietsendiefstal LinechartFietsendiefstal = new Linechart_Fietsendiefstal();
+    Piechart_parkeerautomaten Piechartparkeerautomaten = new Piechart_parkeerautomaten();
 
     // we moeten in alle charts een constructor maken met eigenlijk alles daar in, zodat we hier een object kunnen maken en daarmee de scene kunnen aanroepen
     Scene menuscene, grafscene, mapscene;
@@ -31,7 +34,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         window1 = primaryStage;
         window2 = new Stage();
+        window3 = new Stage();
+        window4 = new Stage();
+        window5 = new Stage();
+
         window2.setScene(TasjesDiefstalChart.getSceneDiefstal());
+        window3.setTitle("Tevredenheid bevolking per regio");
+        window3.setScene(BarchartTevredenheid.getSceneBarchart());
+        window4.setTitle("Fietsendiefstal");
+        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal());
+        window5.setTitle("Aantal parkeerautomaten");
+        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten());
+
 
         //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
@@ -48,14 +62,19 @@ public class Main extends Application {
 
         // grafieken screen
         VBox grafVbox = new VBox(15); //layout
-        Button grafiek1 = new Button("grafiek1"); // (Barchart)
+        Button grafiek1 = new Button("grafiek1"); // Piechart_tasjesdiefstal
         grafiek1.setOnAction(e -> window2.showAndWait());
+        Button grafiek2 = new Button("grafiek2"); // Tevredenheid bevolking per regio
+        grafiek2.setOnAction(e -> window3.showAndWait());
+        Button grafiek3 = new Button("grafiek3"); // Linechart_Fietsendiefstal
+        grafiek3.setOnAction(e -> window4.showAndWait());
+        Button grafiek4 = new Button("grafiek4"); //
+        grafiek4.setOnAction(e -> window5.showAndWait());
 
         Button backbut1 = new Button("Terug naar menu"); // back to main menu button
-        GridPane.setConstraints(backbut1, 0, 5);
         backbut1.setOnAction(e -> window1.setScene(menuscene)); //action of the button
 
-        grafVbox.getChildren().addAll(grafiek1, backbut1);
+        grafVbox.getChildren().addAll(grafiek1, grafiek2, grafiek3, grafiek4, backbut1); //, grafiek2, grafiek3, grafiek4
         grafVbox.setAlignment(Pos.CENTER);
         grafscene = new Scene(grafVbox, 1280, 720);
 

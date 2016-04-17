@@ -7,24 +7,27 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 
-public class Linechart extends Application {
-    Database db = new Database();
-    String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
-    double data2006 = Double.parseDouble(db.execute(Query_, "SUM(year_2006)").get(0));
-    double data2007 = Double.parseDouble(db.execute(Query_, "SUM(year_2007)").get(1));
-    double data2008 = Double.parseDouble(db.execute(Query_, "SUM(year_2008)").get(2));
-    double data2009 = Double.parseDouble(db.execute(Query_, "SUM(year_2009)").get(3));
-    double data2011 = Double.parseDouble(db.execute(Query_, "SUM(year_2011)").get(4));
+public class Linechart_Fietsendiefstal {
 
-    @Override public void start(Stage stage) {
-        stage.setTitle("Fietsendiefstal");
+    public Linechart_Fietsendiefstal() {
+    }
+
+    public Scene getSceneFietsendiefstal() {
+        Database db = new Database();
+        String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
+        double data2006 = Double.parseDouble(db.execute(Query_, "SUM(year_2006)").get(0));
+        double data2007 = Double.parseDouble(db.execute(Query_, "SUM(year_2007)").get(1));
+        double data2008 = Double.parseDouble(db.execute(Query_, "SUM(year_2008)").get(2));
+        double data2009 = Double.parseDouble(db.execute(Query_, "SUM(year_2009)").get(3));
+        double data2011 = Double.parseDouble(db.execute(Query_, "SUM(year_2011)").get(4));
+
         final CategoryAxis xAxis = new CategoryAxis(); // x as
         final NumberAxis yAxis = new NumberAxis(); // y as
         xAxis.setLabel("Jaar");
         yAxis.setLabel("Hoeveelheid");
         //creating the chart
-        final LineChart<String,Number> lineChart =
-                new LineChart<String,Number>(xAxis,yAxis);
+        final LineChart<String, Number> lineChart =
+                new LineChart<String, Number>(xAxis, yAxis);
 
         lineChart.setTitle("Fietsendiefstal per jaar");
         //defining a series
@@ -38,14 +41,10 @@ public class Linechart extends Application {
         series.getData().add(new XYChart.Data("2011", data2011));
 
 
-        Scene scene  = new Scene(lineChart,800,600);
+        Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(series);
 
-        stage.setScene(scene);
-        stage.show();
-    }
+        return scene;
 
-    public static void main(String[] args) {
-        launch(args);
     }
 }
