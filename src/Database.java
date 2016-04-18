@@ -27,6 +27,7 @@ public class Database {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
             while (myResultset.next()) { // eigenlijk een soort for loop door de resultaten
+                Result.clear();
                 Result.add(myResultset.getString(Selector));
             }
         } catch (SQLException e) {

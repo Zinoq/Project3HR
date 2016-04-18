@@ -16,10 +16,10 @@ public class Linechart_Fietsendiefstal {
         Database db = new Database();
         String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
         double data2006 = Double.parseDouble(db.execute(Query_, "SUM(year_2006)").get(0));
-        double data2007 = Double.parseDouble(db.execute(Query_, "SUM(year_2007)").get(1));
-        double data2008 = Double.parseDouble(db.execute(Query_, "SUM(year_2008)").get(2));
-        double data2009 = Double.parseDouble(db.execute(Query_, "SUM(year_2009)").get(3));
-        double data2011 = Double.parseDouble(db.execute(Query_, "SUM(year_2011)").get(4));
+        double data2007 = Double.parseDouble(db.execute(Query_, "SUM(year_2007)").get(0));
+        double data2008 = Double.parseDouble(db.execute(Query_, "SUM(year_2008)").get(0));
+        double data2009 = Double.parseDouble(db.execute(Query_, "SUM(year_2009)").get(0));
+        double data2011 = Double.parseDouble(db.execute(Query_, "SUM(year_2011)").get(0));
 
         final CategoryAxis xAxis = new CategoryAxis(); // x as
         final NumberAxis yAxis = new NumberAxis(); // y as

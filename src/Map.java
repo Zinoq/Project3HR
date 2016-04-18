@@ -131,7 +131,7 @@ public class Map implements MapComponentInitializedListener{
 
                 //Add an info window to a marker
                 InfoWindowOptions infoOptions = new InfoWindowOptions();
-                infoOptions.content(Database.execute("SELECT Plaats FROM standard.markten WHERE Plaats IS NOT NULL", "Plaats").get(i))
+                infoOptions.content(Database.execute("SELECT Plaats FROM standard.markten WHERE Plaats IS NOT NULL", "Plaats").get(0))
                         .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)));
                 InfoWindow window = new InfoWindow(infoOptions);
 

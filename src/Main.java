@@ -3,16 +3,13 @@
  */
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Main extends Application {
     Stage window1, window2, window3, window4, window5, mapwindow;
@@ -23,7 +20,6 @@ public class Main extends Application {
     Piechart_parkeerautomaten Piechartparkeerautomaten = new Piechart_parkeerautomaten();
     Map map = new Map();
 
-    // we moeten in alle charts een constructor maken met eigenlijk alles daar in, zodat we hier een object kunnen maken en daarmee de scene kunnen aanroepen
     Scene menuscene, grafscene;
 
     public static void main(String[] args) {
@@ -32,6 +28,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         window1 = primaryStage;
         window2 = new Stage();
         window3 = new Stage();
@@ -50,13 +47,14 @@ public class Main extends Application {
         mapwindow.setTitle("Map");
         mapwindow.setScene(map.getMapScene());
 
+
         //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
         Button grafbut = new Button("Grafieken"); // grafiek button
         grafbut.setOnAction(e -> window1.setScene(grafscene)); // gaat naar het scherm met grafieken
-        Button mapbut = new Button("markten map"); // market/parkeerautomaten button
+        Button mapbut = new Button("Markten Kaart"); // market/parkeerautomaten button
         mapbut.setOnAction(e -> mapwindow.showAndWait()); // gaat naar het scherm met de map
-        Button quit = new Button("quit"); // quit button
+        Button quit = new Button("Afsluiten"); // quit button
         quit.setOnAction(e -> window1.close());
 
         mainmenu.getChildren().addAll(grafbut, mapbut, quit);
@@ -80,6 +78,14 @@ public class Main extends Application {
         grafVbox.getChildren().addAll(grafiek1, grafiek2, grafiek3, grafiek4, backbut1); //, grafiek2, grafiek3, grafiek4
         grafVbox.setAlignment(Pos.CENTER);
         grafscene = new Scene(grafVbox, 1280, 720);
+
+
+        File f = new File("mainStyle.css");
+        menuscene.getStylesheets().clear();
+        grafscene.getStylesheets().clear();
+        menuscene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        grafscene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+
 
         primaryStage.setTitle("Test project 3");
         primaryStage.setScene(menuscene);
