@@ -1,7 +1,11 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class Barchart_Tevredenheid {
@@ -9,6 +13,15 @@ public class Barchart_Tevredenheid {
     public Barchart_Tevredenheid() {}
 
     public Scene getSceneBarchart() {
+        //layout scene
+        HBox hbox = new HBox();
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        BorderPane borderpane = new BorderPane();
+
+        //chart
         Database Database2 = new Database();
         String Stadsdriehoek = "Stadsdriehoek/C.S. Kwartier";
         String OudeWesten = "Oude Westen";
@@ -22,8 +35,6 @@ public class Barchart_Tevredenheid {
         final BarChart<String, Number> bc = new BarChart<String, Number>(xAxis, yAxis);
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Percentage");
-        bc.setTitle("Tevredenheid bevolking per regio");
-
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2006");
@@ -66,7 +77,7 @@ public class Barchart_Tevredenheid {
         series5.getData().add(new XYChart.Data(Rotterdam, Double.parseDouble(Database2.execute("SELECT year_2011 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Rotterdam';", "year_2011").get(24))));
 
 
-        Scene scene = new Scene(bc, 1280, 720);
+        Scene scene = new Scene(borderpane);
         scene.getStylesheets().add(css);
         bc.getData().addAll(series1, series2, series3, series4, series5);
 
