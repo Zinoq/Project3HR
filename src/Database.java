@@ -83,11 +83,9 @@ public class Database {
 
     public static void main(String[] args) {
         Database Database = new Database(); // new database object en verbinding met de database maken
-//        Database.execute("SELECT Inventarisnr, Deelgem FROM standard.parkeerautomaten WHERE Inventarisnr=100.0", "Inventarisnr"); // dit maakt een lijst met resultaten
-//        Database.getSpecific(Results, 2); // dit selecteerd alleen de 2e straat
-//        System.out.println(Database.getMarkerLong().get(2));
-//        System.out.println(Database.getMarkerLat().get(2));
-//        System.out.println(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Cool/Nieuwe, Werk/Dijkzigt';", "year_2007").get(0));
+
+        String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
+        System.out.println(Double.parseDouble(Database.execute(Query_, "SUM(year_2006)").get(0)));
     }
 }
 

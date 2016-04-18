@@ -18,13 +18,17 @@ import javafx.stage.Stage;
 import javafx.scene.chart.*;
 import javafx.scene.Group;
 
+import java.util.ArrayList;
+
 public class Piechart_tasjesdiefstal {
 
     public Piechart_tasjesdiefstal() {
 
     }
 
-    public Scene getSceneDiefstal(Database Database) {
+
+    public Scene getSceneDiefstal() {
+        Database Database = new Database();
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();
@@ -32,8 +36,6 @@ public class Piechart_tasjesdiefstal {
         grid.setVgap(10);
         grid.setHgap(10);
         BorderPane borderpane = new BorderPane();
-
-
 
         Button button2006 = new Button("2006");
         GridPane.setConstraints(button2006, 0, 0);
@@ -59,8 +61,6 @@ public class Piechart_tasjesdiefstal {
         button2007.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2007)");
             Query2.replace(7, 21, "SUM(year_2007)");
-            double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
-            double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));
         });
 
         button2008.setOnAction(e -> {
@@ -77,6 +77,7 @@ public class Piechart_tasjesdiefstal {
             Query1.replace(7, 21, "SUM(year_2011)");
             Query2.replace(7, 21, "SUM(year_2011)");
         });
+
 
         double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
         double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));

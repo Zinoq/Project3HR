@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Database Database = new Database();
     Stage window1, window2, window3, window4, window5;
 
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
@@ -39,13 +38,13 @@ public class Main extends Application {
         window5 = new Stage();
 
         window2.setTitle("Tasjes Diefstal met en zonder geweld");
-        window2.setScene(TasjesDiefstalChart.getSceneDiefstal(Database));
+        window2.setScene(TasjesDiefstalChart.getSceneDiefstal());
         window3.setTitle("Tevredenheid bevolking per regio");
-        window3.setScene(BarchartTevredenheid.getSceneBarchart(Database));
+        window3.setScene(BarchartTevredenheid.getSceneBarchart());
         window4.setTitle("Fietsendiefstal");
-        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal(Database));
+        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal());
         window5.setTitle("Aantal parkeerautomaten");
-        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten(Database));
+        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten());
 
 
         //main menu screen

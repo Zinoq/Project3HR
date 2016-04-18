@@ -12,7 +12,8 @@ public class Barchart_Tevredenheid {
 
     public Barchart_Tevredenheid() {}
 
-    public Scene getSceneBarchart(Database Database) {
+    public Scene getSceneBarchart() {
+        Database Database = new Database();
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();
