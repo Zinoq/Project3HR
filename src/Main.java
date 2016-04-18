@@ -6,13 +6,14 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
 
 public class Main extends Application {
-    Stage window1, window2, window3, window4, window5, mapwindow;
+    Stage window, grafiek1window, grafiek2window, grafiek3window, grafiek4window, mapwindow;
     Database Database = new Database();
 
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
@@ -29,27 +30,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        window1 = primaryStage;
-
-        window3 = new Stage();
-        window4 = new Stage();
-        window5 = new Stage();
-
-        window3.setTitle("Tevredenheid bevolking per regio");
-        window3.setScene(BarchartTevredenheid.getSceneBarchart(Database));
-        window4.setTitle("Fietsendiefstal");
-        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal(Database));
-        window5.setTitle("Aantal parkeerautomaten");
-        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten(Database));
-
-
-
+        window = primaryStage;
+        
         //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
 
         Button grafbut = new Button("Grafieken"); // grafiek button
-        grafbut.setOnAction(e -> window1.setScene(grafscene)); // gaat naar het scherm met grafieken
+        grafbut.setOnAction(e -> window.setScene(grafscene)); // gaat naar het scherm met grafieken
 
         Button mapbut = new Button("Markten Kaart"); // market/parkeerautomaten button
         mapbut.setOnAction(e ->{
@@ -60,7 +47,7 @@ public class Main extends Application {
         }); // gaat naar het scherm met de map
 
         Button quit = new Button("Afsluiten"); // quit button
-        quit.setOnAction(e -> window1.close());
+        quit.setOnAction(e -> window.close());
 
         mainmenu.getChildren().addAll(grafbut, mapbut, quit);
         mainmenu.setAlignment(Pos.CENTER);
@@ -69,27 +56,46 @@ public class Main extends Application {
         // grafieken screen
         VBox grafVbox = new VBox(15); //layout
 
-        Button grafiek1 = new Button("grafiek1"); // Piechart_tasjesdiefstal
+        Label grafiek1label = new Label("Tasjes diefstal met of zonder geweld");
+        Button grafiek1 = new Button("Toon Grafiek"); // Piechart_tasjesdiefstal
         grafiek1.setOnAction(e -> {
-            window2 = new Stage();
-            window2.setTitle("Tasjes Diefstal met en zonder geweld");
-            window2.setScene(TasjesDiefstalChart.getSceneDiefstal(Database));
-            window2.showAndWait();
+            grafiek1window = new Stage();
+            grafiek1window.setTitle("Tasjes Diefstal met en zonder geweld");
+            grafiek1window.setScene(TasjesDiefstalChart.getSceneDiefstal(Database));
+            grafiek1window.showAndWait();
         });
 
-        Button grafiek2 = new Button("grafiek2"); // Tevredenheid bevolking per regio
-        grafiek2.setOnAction(e -> window3.showAndWait());
+        Label grafiek2label = new Label("Tevredenheid van de bevolking per regio en jaar");
+        Button grafiek2 = new Button("Toon Grafiek"); // Tevredenheid bevolking per regio
+        grafiek2.setOnAction(e -> {
+            grafiek2window = new Stage();
+            grafiek2window.setTitle("Tevredenheid bevolking per regio");
+            grafiek2window.setScene(BarchartTevredenheid.getSceneBarchart(Database));
+            grafiek2window.showAndWait();
+        });
 
-        Button grafiek3 = new Button("grafiek3"); // Linechart_Fietsendiefstal
-        grafiek3.setOnAction(e -> window4.showAndWait());
+        Label grafiek3label = new Label("Fietsendiefstal per jaar");
+        Button grafiek3 = new Button("Toon Grafiek"); // Linechart_Fietsendiefstal
+        grafiek3.setOnAction(e -> {
+            grafiek3window = new Stage();
+            grafiek3window.setTitle("Fietsendiefstal");
+            grafiek3window.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal(Database));
+            grafiek3window.showAndWait();
+        });
 
-        Button grafiek4 = new Button("grafiek4"); //
-        grafiek4.setOnAction(e -> window5.showAndWait());
+        Label grafiek4label = new Label("Aantal parkeerautomaten per deelgemeente");
+        Button grafiek4 = new Button("Toon Grafiek"); //
+        grafiek4.setOnAction(e -> {
+            grafiek4window = new Stage();
+            grafiek4window.setTitle("Aantal parkeerautomaten");
+            grafiek4window.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten(Database));
+            grafiek4window.showAndWait();
+        });
 
         Button backbut1 = new Button("Terug naar menu"); // back to main menu button
-        backbut1.setOnAction(e -> window1.setScene(menuscene)); //action of the button
+        backbut1.setOnAction(e -> window.setScene(menuscene)); //action of the button
 
-        grafVbox.getChildren().addAll(grafiek1, grafiek2, grafiek3, grafiek4, backbut1); //, grafiek2, grafiek3, grafiek4
+        grafVbox.getChildren().addAll(grafiek1label, grafiek1, grafiek2label, grafiek2, grafiek3label,  grafiek3, grafiek4label, grafiek4, backbut1); // toevoegen aan het spel
         grafVbox.setAlignment(Pos.CENTER);
         grafscene = new Scene(grafVbox, 1280, 720);
 

@@ -19,10 +19,9 @@ public class Map implements MapComponentInitializedListener{
         GoogleMapView mapView;
         GoogleMap map;
         public Label daglabel;
-        Database Database = new Database();
         Scene scene;
         Boolean running = false;
-
+        Database Database = new Database();
         public Map(){
         }
 
@@ -66,11 +65,11 @@ public class Map implements MapComponentInitializedListener{
 
             Button startbut = new Button("Start animation");
             GridPane.setConstraints(startbut, 1,6);
-            startbut.setOnAction(event -> {System.out.println("start");});
+            startbut.setOnAction(event -> {System.out.println("Start");});
 
             Button stopbut = new Button("Stop animation");
             GridPane.setConstraints(stopbut, 1,7);
-            stopbut.setOnAction(event -> {System.out.println("stop");});
+            stopbut.setOnAction(event -> {System.out.println("Stop");});
 
             daglabel = new Label("");
             GridPane.setConstraints(daglabel, 1,8);
