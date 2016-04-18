@@ -38,6 +38,7 @@ public class Main extends Application {
         window4 = new Stage();
         window5 = new Stage();
 
+        window2.setTitle("Tasjes Diefstal met en zonder geweld");
         window2.setScene(TasjesDiefstalChart.getSceneDiefstal());
         window3.setTitle("Tevredenheid bevolking per regio");
         window3.setScene(BarchartTevredenheid.getSceneBarchart());
