@@ -23,7 +23,7 @@ public class Piechart_parkeerautomaten {
 
     public Piechart_parkeerautomaten(){}
 
-    public Scene getSceneparkeerautomaten(){
+    public Scene getSceneparkeerautomaten(Database Database){
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();
@@ -33,7 +33,6 @@ public class Piechart_parkeerautomaten {
         BorderPane borderpane = new BorderPane();
 
         // chart
-        Database Database = new Database();
         double Noord = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Noord\";", "Count(*)").get(0)); //get omdat het in een lijst staat
         double Centrum = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Centrum\";", "Count(*)").get(1));
         double Charlois = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Charlois\";", "Count(*)").get(2));

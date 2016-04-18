@@ -21,9 +21,10 @@ import javafx.scene.Group;
 public class Piechart_tasjesdiefstal {
 
     public Piechart_tasjesdiefstal() {
+
     }
 
-    public Scene getSceneDiefstal() {
+    public Scene getSceneDiefstal(Database Database) {
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();
@@ -32,12 +33,53 @@ public class Piechart_tasjesdiefstal {
         grid.setHgap(10);
         BorderPane borderpane = new BorderPane();
 
-        // chart
-        Database Database = new Database();
-        String Query1 = "SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_met_geweld;";
-        String Query2 = "SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_zonder_geweld;";
-        double MetGeweld = Double.parseDouble(Database.execute(Query1, "SUM(year_2006)").get(0));
-        double ZonderGeweld = Double.parseDouble(Database.execute(Query2, "SUM(year_2006)").get(1));
+
+
+        Button button2006 = new Button("2006");
+        GridPane.setConstraints(button2006, 0, 0);
+        Button button2007 = new Button("2007");
+        GridPane.setConstraints(button2007, 1, 0);
+        Button button2008 = new Button("2008");
+        GridPane.setConstraints(button2008, 2, 0);
+        Button button2009 = new Button("2009");
+        GridPane.setConstraints(button2009, 3, 0);
+        Button button2011 = new Button("2011");
+        GridPane.setConstraints(button2011, 4, 0);
+        grid.setAlignment(Pos.CENTER);
+        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
+
+        StringBuilder Query1 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_met_geweld;");
+        StringBuilder Query2 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_zonder_geweld;");
+
+        button2006.setOnAction(e -> {
+            Query1.replace(7, 21, "SUM(year_2006)");
+            Query2.replace(7, 21, "SUM(year_2006)");
+        });
+
+        button2007.setOnAction(e -> {
+            Query1.replace(7, 21, "SUM(year_2007)");
+            Query2.replace(7, 21, "SUM(year_2007)");
+            double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
+            double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));
+        });
+
+        button2008.setOnAction(e -> {
+            Query1.replace(7, 21, "SUM(year_2008)");
+            Query2.replace(7, 21, "SUM(year_2008)");
+        });
+
+        button2009.setOnAction(e -> {
+            Query1.replace(7, 21, "SUM(year_2009)");
+            Query2.replace(7, 21, "SUM(year_2009)");
+        });
+
+        button2011.setOnAction(e -> {
+            Query1.replace(7, 21, "SUM(year_2011)");
+            Query2.replace(7, 21, "SUM(year_2011)");
+        });
+
+        double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
+        double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));
         Scene sceneDiefstal = new Scene(borderpane);
 
         ObservableList<PieChart.Data> pieChartData =
@@ -55,16 +97,6 @@ public class Piechart_tasjesdiefstal {
         caption.setStyle("-fx-font: 16 Roboto;");
         children.add(caption);
         hbox.getChildren().addAll(children);
-
-        // buttons
-        Button test1 = new Button("test1");
-        GridPane.setConstraints(test1, 0, 0);
-        Button test2 = new Button("test2");
-        GridPane.setConstraints(test2, 1, 0);
-        Button test3 = new Button("test3");
-        GridPane.setConstraints(test3, 2, 0);
-        grid.setAlignment(Pos.CENTER);
-        grid.getChildren().addAll(test1, test2, test3);
 
         borderpane.setBottom(grid);
         borderpane.setTop(hbox);
@@ -85,3 +117,15 @@ public class Piechart_tasjesdiefstal {
         return sceneDiefstal;
     }
 }
+
+//    public static void main(String[] args) {
+//        Database Database = new Database();
+//        StringBuilder Query1 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_met_geweld;");
+//        StringBuilder Query2 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_zonder_geweld;");
+//        double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
+//        double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));
+//        System.out.println(MetGeweld);
+//        System.out.println(ZonderGeweld);
+//
+//    }
+//}

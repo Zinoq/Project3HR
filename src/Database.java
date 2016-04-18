@@ -33,6 +33,20 @@ public class Database {
         return Result;
     }
 
+    public ArrayList<String> newExecute(String Query) {
+        try {
+            Statement myStatement = connection.createStatement();
+            ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
+            while (myResultset.next()) { // eigenlijk een soort for loop door de resultaten
+                Result.add(myResultset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Result;
+    }
+
+
     public ArrayList<Double> getMarkerLat() {
         try {
             Statement myStatement = connection.createStatement();
@@ -73,7 +87,6 @@ public class Database {
 //        Database.getSpecific(Results, 2); // dit selecteerd alleen de 2e straat
 //        System.out.println(Database.getMarkerLong().get(2));
 //        System.out.println(Database.getMarkerLat().get(2));
-//        System.out.println(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Stadsdriehoek/C.S. Kwartier';", "year_2006").get(0));
 //        System.out.println(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Cool/Nieuwe, Werk/Dijkzigt';", "year_2007").get(0));
     }
 }
