@@ -13,6 +13,7 @@ import java.io.File;
 
 public class Main extends Application {
     Stage window1, window2, window3, window4, window5, mapwindow;
+    Database Database = new Database();
 
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
     Barchart_Tevredenheid BarchartTevredenheid = new Barchart_Tevredenheid();
@@ -30,30 +31,34 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         window1 = primaryStage;
-        window2 = new Stage();
+
         window3 = new Stage();
         window4 = new Stage();
         window5 = new Stage();
-        mapwindow = new Stage();
 
-        window2.setTitle("Tasjes Diefstal met en zonder geweld");
-        window2.setScene(TasjesDiefstalChart.getSceneDiefstal());
         window3.setTitle("Tevredenheid bevolking per regio");
-        window3.setScene(BarchartTevredenheid.getSceneBarchart());
+        window3.setScene(BarchartTevredenheid.getSceneBarchart(Database));
         window4.setTitle("Fietsendiefstal");
-        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal());
+        window4.setScene(LinechartFietsendiefstal.getSceneFietsendiefstal(Database));
         window5.setTitle("Aantal parkeerautomaten");
-        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten());
-        mapwindow.setTitle("Map");
-        mapwindow.setScene(map.getMapScene());
+        window5.setScene(Piechartparkeerautomaten.getSceneparkeerautomaten(Database));
+
 
 
         //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
+
         Button grafbut = new Button("Grafieken"); // grafiek button
         grafbut.setOnAction(e -> window1.setScene(grafscene)); // gaat naar het scherm met grafieken
+
         Button mapbut = new Button("Markten Kaart"); // market/parkeerautomaten button
-        mapbut.setOnAction(e -> mapwindow.showAndWait()); // gaat naar het scherm met de map
+        mapbut.setOnAction(e ->{
+            mapwindow = new Stage();
+            mapwindow.setTitle("Map");
+            mapwindow.setScene(map.getMapScene());
+            mapwindow.showAndWait();
+        }); // gaat naar het scherm met de map
+
         Button quit = new Button("Afsluiten"); // quit button
         quit.setOnAction(e -> window1.close());
 
@@ -63,12 +68,21 @@ public class Main extends Application {
 
         // grafieken screen
         VBox grafVbox = new VBox(15); //layout
+
         Button grafiek1 = new Button("grafiek1"); // Piechart_tasjesdiefstal
-        grafiek1.setOnAction(e -> window2.showAndWait());
+        grafiek1.setOnAction(e -> {
+            window2 = new Stage();
+            window2.setTitle("Tasjes Diefstal met en zonder geweld");
+            window2.setScene(TasjesDiefstalChart.getSceneDiefstal(Database));
+            window2.showAndWait();
+        });
+
         Button grafiek2 = new Button("grafiek2"); // Tevredenheid bevolking per regio
         grafiek2.setOnAction(e -> window3.showAndWait());
+
         Button grafiek3 = new Button("grafiek3"); // Linechart_Fietsendiefstal
         grafiek3.setOnAction(e -> window4.showAndWait());
+
         Button grafiek4 = new Button("grafiek4"); //
         grafiek4.setOnAction(e -> window5.showAndWait());
 

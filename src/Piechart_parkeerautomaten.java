@@ -23,8 +23,7 @@ public class Piechart_parkeerautomaten {
 
     public Piechart_parkeerautomaten(){}
 
-    public Scene getSceneparkeerautomaten(){
-        Database Database = new Database();
+    public Scene getSceneparkeerautomaten(Database Database){
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();

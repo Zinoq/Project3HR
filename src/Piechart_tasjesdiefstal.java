@@ -27,8 +27,8 @@ public class Piechart_tasjesdiefstal {
     }
 
 
-    public Scene getSceneDiefstal() {
-        Database Database = new Database();
+    public Scene getSceneDiefstal(Database Database) {
+
         //layout scene
         HBox hbox = new HBox();
         GridPane grid = new GridPane();
@@ -52,35 +52,41 @@ public class Piechart_tasjesdiefstal {
 
         StringBuilder Query1 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_met_geweld;");
         StringBuilder Query2 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_zonder_geweld;");
+        StringBuilder Selector = new StringBuilder("SUM(year_2006)");
 
         button2006.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2006)");
             Query2.replace(7, 21, "SUM(year_2006)");
+            Selector.replace(0, 13, "SUM(year_2006)");
         });
 
         button2007.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2007)");
             Query2.replace(7, 21, "SUM(year_2007)");
+            Selector.replace(0, 13, "SUM(year_2007)");
         });
 
         button2008.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2008)");
             Query2.replace(7, 21, "SUM(year_2008)");
+            Selector.replace(0, 13, "SUM(year_2008)");
         });
 
         button2009.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2009)");
             Query2.replace(7, 21, "SUM(year_2009)");
+            Selector.replace(0, 13, "SUM(year_2009)");
         });
 
         button2011.setOnAction(e -> {
             Query1.replace(7, 21, "SUM(year_2011)");
             Query2.replace(7, 21, "SUM(year_2011)");
+            Selector.replace(0, 13, "SUM(year_2011)");
         });
 
 
-        double MetGeweld = Double.parseDouble(Database.newExecute(Query1.toString()).get(0));
-        double ZonderGeweld = Double.parseDouble(Database.newExecute(Query2.toString()).get(1));
+        double MetGeweld = Double.parseDouble(Database.execute(Query1.toString(), Selector.toString()).get(0));
+        double ZonderGeweld = Double.parseDouble(Database.execute(Query2.toString(), Selector.toString()).get(0));
         Scene sceneDiefstal = new Scene(borderpane);
 
         ObservableList<PieChart.Data> pieChartData =

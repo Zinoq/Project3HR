@@ -12,8 +12,7 @@ public class Barchart_Tevredenheid {
 
     public Barchart_Tevredenheid() {}
 
-    public Scene getSceneBarchart() {
-        Database Database = new Database();
+    public Scene getSceneBarchart(Database Database) {
 
         //chart
 
