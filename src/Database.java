@@ -9,8 +9,10 @@ import java.util.ArrayList;
 public class Database {
     public ArrayList<String> Result = new ArrayList<>();
     public Connection connection;
-    public ArrayList<Double> XLong = new ArrayList<>();
-    public ArrayList<Double> YLat = new ArrayList<>();
+    public ArrayList<Double> XMLong = new ArrayList<>();
+    public ArrayList<Double> YMLat = new ArrayList<>();
+    public ArrayList<Double> XPLong = new ArrayList<>();
+    public ArrayList<Double> YPLat = new ArrayList<>();
 
     public Database() {
         try {
@@ -55,13 +57,13 @@ public class Database {
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
 //                System.out.println(myResultset.getDouble("X_Coord"));
-                XLong.add(myResultset.getDouble("Latitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+                XMLong.add(myResultset.getDouble("Latitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         //        System.out.println(Results);
-        return XLong;
+        return XMLong;
     }
 
     public ArrayList<Double> getMarkerLong() {
@@ -72,13 +74,47 @@ public class Database {
             // output
             while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
 //                System.out.println(myResultset.getDouble("Y_Coord"));
-                YLat.add(myResultset.getDouble("Longitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+                YMLat.add(myResultset.getDouble("Longitude")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         //        System.out.println(Results);
-        return YLat;
+        return YMLat;
+    }
+
+    public ArrayList<Double> getParkeerLat() {
+        try {
+            Statement myStatement = connection.createStatement();
+            ResultSet myResultset = myStatement.executeQuery("SELECT X_Coord FROM standard.parkeerautomaten WHERE X_Coord IS NOT NULL");
+
+            // output
+            while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
+//                System.out.println(myResultset.getDouble("X_Coord"));
+                XPLong.add(myResultset.getDouble("X_coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //        System.out.println(Results);
+        return XPLong;
+    }
+
+    public ArrayList<Double> getParkeerLong() {
+        try {
+            Statement myStatement = connection.createStatement();
+            ResultSet myResultset = myStatement.executeQuery("SELECT Y_Coord FROM standard.parkeerautomaten WHERE Y_Coord IS NOT NULL");
+
+            // output
+            while (myResultset.next()) { //loop door alle resultaten als er meerdere zijn
+//                System.out.println(myResultset.getDouble("Y_Coord"));
+                YPLat.add(myResultset.getDouble("Y_Coord")); //Alle resultaten worden in een lijst gezet, waar we later mee kunnen werken
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //        System.out.println(Results);
+        return YPLat;
     }
 
     public static void main(String[] args) {
