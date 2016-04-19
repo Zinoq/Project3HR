@@ -32,6 +32,19 @@ public class Piechart_parkeerautomaten {
         grid.setHgap(10);
         BorderPane borderpane = new BorderPane();
 
+        Button button2006 = new Button("2006");
+        GridPane.setConstraints(button2006, 0, 0);
+        Button button2007 = new Button("2007");
+        GridPane.setConstraints(button2007, 1, 0);
+        Button button2008 = new Button("2008");
+        GridPane.setConstraints(button2008, 2, 0);
+        Button button2009 = new Button("2009");
+        GridPane.setConstraints(button2009, 3, 0);
+        Button button2011 = new Button("2011");
+        GridPane.setConstraints(button2011, 4, 0);
+        grid.setAlignment(Pos.CENTER);
+        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
+
         // chart
         double Noord = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Noord\";", "Count(*)").get(0)); //get omdat het in een lijst staat
         double Centrum = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Centrum\";", "Count(*)").get(0));
@@ -67,18 +80,6 @@ public class Piechart_parkeerautomaten {
         caption.setStyle("-fx-font: 16 Roboto;");
         children.add(caption);
         hbox.getChildren().addAll(children);
-
-        // buttons
-        Button test1 = new Button("test1");
-        GridPane.setConstraints(test1, 0, 0);
-        Button test2 = new Button("test2");
-        GridPane.setConstraints(test2, 1, 0);
-        Button test3 = new Button("test3");
-        GridPane.setConstraints(test3, 2, 0);
-        Button test4 = new Button("test4");
-        GridPane.setConstraints(test4, 3, 0);
-        grid.setAlignment(Pos.CENTER);
-        grid.getChildren().addAll(test1, test2, test3, test4);
 
         borderpane.setBottom(grid);
         borderpane.setTop(hbox);
