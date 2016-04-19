@@ -13,13 +13,14 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class Main extends Application {
-    Stage window, grafiek1window, grafiek2window, grafiek3window, grafiek4window, mapwindow;
+    Stage window, grafiek1window, grafiek2window, grafiek3window, grafiek4window, grafiek5window, mapwindow;
     Database Database = new Database();
 
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
     Barchart_Tevredenheid BarchartTevredenheid = new Barchart_Tevredenheid();
     Linechart_Fietsendiefstal LinechartFietsendiefstal = new Linechart_Fietsendiefstal();
     Piechart_parkeerautomaten Piechartparkeerautomaten = new Piechart_parkeerautomaten();
+    Barchart_Fietsendiefstal2006 BarchartFietsendiefstal = new Barchart_Fietsendiefstal2006();
     Map map = new Map();
 
     Scene menuscene, grafscene;
@@ -38,7 +39,7 @@ public class Main extends Application {
         Button grafbut = new Button("Grafieken"); // grafiek button
         grafbut.setOnAction(e -> window.setScene(grafscene)); // gaat naar het scherm met grafieken
 
-        Button mapbut = new Button("Markten Kaart"); // market/parkeerautomaten button
+        Button mapbut = new Button("Markten Kaart"); // google maps wordt pas geladen als er op de kaart knop geklikt wordt, dit voor veel betere performance bij opstarten
         mapbut.setOnAction(e ->{
             mapwindow = new Stage();
             mapwindow.setTitle("Map");
@@ -92,10 +93,19 @@ public class Main extends Application {
             grafiek4window.showAndWait();
         });
 
+        Label grafiek5label = new Label("Hoeveelheid fietsendiefstallen per wijk in 2006");
+        Button grafiek5 = new Button("Toon Grafiek"); //
+        grafiek5.setOnAction(e -> {
+            grafiek5window = new Stage();
+            grafiek5window.setTitle("Aantal fietsendiefstallen per wijk in 2006");
+            grafiek5window.setScene(BarchartFietsendiefstal.getSceneBarchartFietsendiefstal2006(Database));
+            grafiek5window.showAndWait();
+        });
+
         Button backbut1 = new Button("Terug naar menu"); // back to main menu button
         backbut1.setOnAction(e -> window.setScene(menuscene)); //action of the button
 
-        grafVbox.getChildren().addAll(grafiek1label, grafiek1, grafiek2label, grafiek2, grafiek3label,  grafiek3, grafiek4label, grafiek4, backbut1); // toevoegen aan het spel
+        grafVbox.getChildren().addAll(grafiek1label, grafiek1, grafiek2label, grafiek2, grafiek3label,  grafiek3, grafiek4label, grafiek4, grafiek5label, grafiek5, backbut1); // toevoegen aan het spel
         grafVbox.setAlignment(Pos.CENTER);
         grafscene = new Scene(grafVbox, 1280, 720);
 
@@ -103,11 +113,11 @@ public class Main extends Application {
         File f = new File("mainStyle.css");
         menuscene.getStylesheets().clear();
         grafscene.getStylesheets().clear();
-        menuscene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        menuscene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/")); // voegt css toe aan beide menu schermen
         grafscene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
 
-        primaryStage.setTitle("Test project 3");
+        primaryStage.setTitle("Vision Project 3");
         primaryStage.setScene(menuscene);
         primaryStage.show(); //displays everything
     }

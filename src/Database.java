@@ -106,7 +106,9 @@ public class Database {
         //        System.out.println(Results);
         return YPLat;
     }
+
 }
+
 //    public static void main(String[] args) {
 //        Database Database = new Database(); // new database object en verbinding met de database maken
 //
