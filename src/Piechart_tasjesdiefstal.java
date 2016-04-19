@@ -30,59 +30,59 @@ public class Piechart_tasjesdiefstal {
     public Scene getSceneDiefstal(Database Database) {
 
         //layout scene
-        HBox hbox = new HBox();
+        VBox vbox = new VBox();
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(10);
         grid.setHgap(10);
         BorderPane borderpane = new BorderPane();
 
-        Button button2006 = new Button("2006");
-        GridPane.setConstraints(button2006, 0, 0);
-        Button button2007 = new Button("2007");
-        GridPane.setConstraints(button2007, 1, 0);
-        Button button2008 = new Button("2008");
-        GridPane.setConstraints(button2008, 2, 0);
-        Button button2009 = new Button("2009");
-        GridPane.setConstraints(button2009, 3, 0);
-        Button button2011 = new Button("2011");
-        GridPane.setConstraints(button2011, 4, 0);
-        grid.setAlignment(Pos.CENTER);
-        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
+//        Button button2006 = new Button("2006");
+//        GridPane.setConstraints(button2006, 0, 0);
+//        Button button2007 = new Button("2007");
+//        GridPane.setConstraints(button2007, 1, 0);
+//        Button button2008 = new Button("2008");
+//        GridPane.setConstraints(button2008, 2, 0);
+//        Button button2009 = new Button("2009");
+//        GridPane.setConstraints(button2009, 3, 0);
+//        Button button2011 = new Button("2011");
+//        GridPane.setConstraints(button2011, 4, 0);
+//        grid.setAlignment(Pos.CENTER);
+//        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
 
         StringBuilder Query1 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_met_geweld;");
         StringBuilder Query2 = new StringBuilder("SELECT SUM(year_2006) FROM slachtofferschap_tasjesroof_zonder_geweld;");
         StringBuilder Selector = new StringBuilder("SUM(year_2006)");
 
-        button2006.setOnAction(e -> {
-            Query1.replace(7, 21, "SUM(year_2006)");
-            Query2.replace(7, 21, "SUM(year_2006)");
-            Selector.replace(0, 13, "SUM(year_2006)");
-        });
-
-        button2007.setOnAction(e -> {
-            Query1.replace(7, 21, "SUM(year_2007)");
-            Query2.replace(7, 21, "SUM(year_2007)");
-            Selector.replace(0, 13, "SUM(year_2007)");
-        });
-
-        button2008.setOnAction(e -> {
-            Query1.replace(7, 21, "SUM(year_2008)");
-            Query2.replace(7, 21, "SUM(year_2008)");
-            Selector.replace(0, 13, "SUM(year_2008)");
-        });
-
-        button2009.setOnAction(e -> {
-            Query1.replace(7, 21, "SUM(year_2009)");
-            Query2.replace(7, 21, "SUM(year_2009)");
-            Selector.replace(0, 13, "SUM(year_2009)");
-        });
-
-        button2011.setOnAction(e -> {
-            Query1.replace(7, 21, "SUM(year_2011)");
-            Query2.replace(7, 21, "SUM(year_2011)");
-            Selector.replace(0, 13, "SUM(year_2011)");
-        });
+//        button2006.setOnAction(e -> {
+//            Query1.replace(7, 21, "SUM(year_2006)");
+//            Query2.replace(7, 21, "SUM(year_2006)");
+//            Selector.replace(0, 13, "SUM(year_2006)");
+//        });
+//
+//        button2007.setOnAction(e -> {
+//            Query1.replace(7, 21, "SUM(year_2007)");
+//            Query2.replace(7, 21, "SUM(year_2007)");
+//            Selector.replace(0, 13, "SUM(year_2007)");
+//        });
+//
+//        button2008.setOnAction(e -> {
+//            Query1.replace(7, 21, "SUM(year_2008)");
+//            Query2.replace(7, 21, "SUM(year_2008)");
+//            Selector.replace(0, 13, "SUM(year_2008)");
+//        });
+//
+//        button2009.setOnAction(e -> {
+//            Query1.replace(7, 21, "SUM(year_2009)");
+//            Query2.replace(7, 21, "SUM(year_2009)");
+//            Selector.replace(0, 13, "SUM(year_2009)");
+//        });
+//
+//        button2011.setOnAction(e -> {
+//            Query1.replace(7, 21, "SUM(year_2011)");
+//            Query2.replace(7, 21, "SUM(year_2011)");
+//            Selector.replace(0, 13, "SUM(year_2011)");
+//        });
 
 
         double MetGeweld = Double.parseDouble(Database.execute(Query1.toString(), Selector.toString()).get(0));
@@ -103,10 +103,15 @@ public class Piechart_tasjesdiefstal {
         caption.setTextFill(Color.BLACK);
         caption.setStyle("-fx-font: 16 Roboto;");
         children.add(caption);
-        hbox.getChildren().addAll(children);
+        vbox.getChildren().addAll(children);
+
+        Label TasjesDiefstalLabel1 = new Label("In deze grafiek is te zien hoeveel overvallen er zijn geweest met en zonder geweld.");
+        Label TasjesDiefstalLabel2 = new Label("De meeste tasjes diefstel in de regio Rotterdam is zonder geweld.");
+        vbox.getChildren().addAll(TasjesDiefstalLabel1, TasjesDiefstalLabel2);
+        vbox.setAlignment(Pos.CENTER);
 
         borderpane.setBottom(grid);
-        borderpane.setTop(hbox);
+        borderpane.setTop(vbox);
 
 
         for (final PieChart.Data data : chart.getData()) {

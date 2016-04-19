@@ -32,18 +32,18 @@ public class Barchart_parkeerautomaten {
         grid.setHgap(10);
         BorderPane borderpane = new BorderPane();
 
-        Button button2006 = new Button("2006");
-        GridPane.setConstraints(button2006, 0, 0);
-        Button button2007 = new Button("2007");
-        GridPane.setConstraints(button2007, 1, 0);
-        Button button2008 = new Button("2008");
-        GridPane.setConstraints(button2008, 2, 0);
-        Button button2009 = new Button("2009");
-        GridPane.setConstraints(button2009, 3, 0);
-        Button button2011 = new Button("2011");
-        GridPane.setConstraints(button2011, 4, 0);
-        grid.setAlignment(Pos.CENTER);
-        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
+//        Button button2006 = new Button("2006");
+//        GridPane.setConstraints(button2006, 0, 0);
+//        Button button2007 = new Button("2007");
+//        GridPane.setConstraints(button2007, 1, 0);
+//        Button button2008 = new Button("2008");
+//        GridPane.setConstraints(button2008, 2, 0);
+//        Button button2009 = new Button("2009");
+//        GridPane.setConstraints(button2009, 3, 0);
+//        Button button2011 = new Button("2011");
+//        GridPane.setConstraints(button2011, 4, 0);
+//        grid.setAlignment(Pos.CENTER);
+//        grid.getChildren().addAll(button2006, button2007, button2008, button2009, button2011);
 
         // chart
         double Noord = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Noord\";", "Count(*)").get(0)); //get omdat het in een lijst staat
