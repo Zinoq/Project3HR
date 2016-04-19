@@ -7,8 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,7 +19,7 @@ public class Main extends Application {
     Piechart_tasjesdiefstal TasjesDiefstalChart = new Piechart_tasjesdiefstal();
     Barchart_Tevredenheid BarchartTevredenheid = new Barchart_Tevredenheid();
     Linechart_Fietsendiefstal LinechartFietsendiefstal = new Linechart_Fietsendiefstal();
-    Piechart_parkeerautomaten Piechartparkeerautomaten = new Piechart_parkeerautomaten();
+    Barchart_parkeerautomaten Piechartparkeerautomaten = new Barchart_parkeerautomaten();
     Barchart_Fietsendiefstal2006 BarchartFietsendiefstal = new Barchart_Fietsendiefstal2006();
     Map map = new Map();
 

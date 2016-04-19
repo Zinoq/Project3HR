@@ -1,13 +1,13 @@
 .root {
 	-fx-font-family: "Roboto", "Sans-Serif";
+	/*-fx-background-image: url("");*/
 
 }
 
 .button:hover {
     /*-fx-background-color: #85bee5;*/
     -fx-position: relative;
-    -fx-animation-name: example;
-    -fx-animation-duration: 2s;
+
 }
 
 

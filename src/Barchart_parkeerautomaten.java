@@ -19,9 +19,9 @@ import javafx.scene.chart.*;
 import javafx.scene.Group;
 
 
-public class Piechart_parkeerautomaten {
+public class Barchart_parkeerautomaten {
 
-    public Piechart_parkeerautomaten(){}
+    public Barchart_parkeerautomaten(){}
 
     public Scene getSceneparkeerautomaten(Database Database){
         //layout scene
@@ -54,48 +54,30 @@ public class Piechart_parkeerautomaten {
         double IJsselmonde =  Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Ijsselmonde\";", "Count(*)").get(0));
         double Kralingen = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Kralingen/Crooswijk\";", "Count(*)").get(0));
         double PrinsAlexander = Double.parseDouble(Database.execute("SELECT COUNT(*) FROM standard.parkeerautomaten WHERE Deelgem=\"Prins Alexander\";", "Count(*)").get(0));
-        String css = this.getClass().getResource("/PiechartStyle.css").toExternalForm();
 
-        Scene scene = new Scene(borderpane);
-        scene.getStylesheets().add(css);
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String, Number> barch = new BarChart<String, Number>(xAxis, yAxis);
+        xAxis.setLabel("Regio");
+        yAxis.setLabel("Hoeveelheid Parkeerautomaten");
 
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Noord", Noord),
-                        new PieChart.Data("Centrum",Centrum),
-                        new PieChart.Data("Charlois", Charlois),
-                        new PieChart.Data("Delfshaven", Delfshaven),
-                        new PieChart.Data("Feijenoord", Feijenoord),
-                        new PieChart.Data("IJsselmonde",IJsselmonde),
-                        new PieChart.Data("Kralingen/Crooswijk", Kralingen),
-                        new PieChart.Data("Prins Alexander", PrinsAlexander));
-        final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Aantal parkeerautomaten per deelgemeente");
-        final ObservableList<Node> children = ((BorderPane) scene.getRoot()).getChildren();
-
-        children.add(chart);
-
-        final Label caption = new Label("");
-        caption.setTextFill(Color.BLACK);
-        caption.setStyle("-fx-font: 16 Roboto;");
-        children.add(caption);
-        hbox.getChildren().addAll(children);
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Hoeveelheid Parkeerautomaten");
+        series1.getData().add(new XYChart.Data("Noord", Noord));
+        series1.getData().add(new XYChart.Data("Centrum", Centrum));
+        series1.getData().add(new XYChart.Data("Charlois", Charlois));
+        series1.getData().add(new XYChart.Data("Delfshaven", Delfshaven));
+        series1.getData().add(new XYChart.Data("Feijenoord", Feijenoord));
+        series1.getData().add(new XYChart.Data("IJsselmonde", IJsselmonde));
+        series1.getData().add(new XYChart.Data("Kralingen", Kralingen));
+        series1.getData().add(new XYChart.Data("Prins Alexander", PrinsAlexander));
 
         borderpane.setBottom(grid);
         borderpane.setTop(hbox);
 
+        Scene scene = new Scene(barch, 1280, 720);
+        barch.getData().addAll(series1);
 
-        for (final PieChart.Data data : chart.getData()) {
-            data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED,
-                    new EventHandler<MouseEvent>() {
-                        @Override public void handle(MouseEvent e) {
-                            caption.setTranslateX(e.getSceneX());
-                            caption.setTranslateY(e.getSceneY());
-                            caption.setText(String.valueOf(data.getPieValue()) + "");
-                            caption.setVisible(true);
-                        }
-                    });
-        }
         return scene;
     }
 }
