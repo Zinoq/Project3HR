@@ -48,7 +48,7 @@ public class Linechart_Fietsendiefstal {
         series.getData().add(new XYChart.Data("2011", data2011));
 
 
-        Scene scene = new Scene(lineChart, 1080, 720);
+        Scene scene = new Scene(lineChart, 1280, 720);
         lineChart.getData().add(series);
 
         return scene;

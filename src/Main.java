@@ -2,12 +2,13 @@
  * Created by jacob on 11-4-2016.
  */
 
-import javafx.application.Application;
+ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+ import javafx.scene.image.ImageView;
+ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
@@ -34,10 +35,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
-
-        //main menu screen
         VBox mainmenu = new VBox(15); //layout van het menu
 
+        //main menu screen
         Button grafbut = new Button("Grafieken"); // grafiek button
         grafbut.setOnAction(e -> window.setScene(grafscene)); // gaat naar het scherm met grafieken
 

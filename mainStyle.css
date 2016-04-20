@@ -1,7 +1,6 @@
 .root {
 	-fx-font-family: "Roboto", "Sans-Serif";
-	/*-fx-background-image: url("");*/
-
+	-fx-background-image: url("menu_background.png");
 }
 
 .button:hover {
