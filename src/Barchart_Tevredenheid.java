@@ -16,8 +16,6 @@ public class Barchart_Tevredenheid {
     public Barchart_Tevredenheid() {}
 
     public Scene getSceneBarchart(Database Database) {
-        VBox vbox = new VBox();
-        BorderPane borderpane = new BorderPane();
         //chart
         String Stadsdriehoek = "Stadsdriehoek/C.S. Kwartier";
         String OudeWesten = "Oude Westen";
@@ -71,14 +69,8 @@ public class Barchart_Tevredenheid {
         series5.getData().add(new XYChart.Data(Stadscentrum, Double.parseDouble(Database.execute("SELECT year_2011 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Stadscentrum';", "year_2011").get(0))));
         series5.getData().add(new XYChart.Data(Rotterdam, Double.parseDouble(Database.execute("SELECT year_2011 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Rotterdam';", "year_2011").get(0))));
 
-        Scene scene = new Scene(bc,1080, 720);
+        Scene scene = new Scene(bc, 1080, 720);
         bc.getData().addAll(series1, series2, series3, series4, series5);
-         vbox.getChildren().add(bc);
-
-        Label TevredenheidLabel1 = new Label("In deze grafiek is de tevredenheid te zien van 5 verschillende wijken.");
-        Label TevredenheidLabel2 = new Label("In 2006 en 2007 was de tevredenheid van de bewoners in elke wijk hoger dan tegenwoordig.");
-        vbox.getChildren().addAll(TevredenheidLabel1, TevredenheidLabel2);
-        vbox.setAlignment(Pos.CENTER);
 
         return scene;
     }

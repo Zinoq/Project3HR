@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
@@ -6,6 +7,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,6 +19,7 @@ public class Linechart_Fietsendiefstal {
 
     public Scene getSceneFietsendiefstal(Database Database) {
         VBox vbox = new VBox();
+        BorderPane borderpane = new BorderPane();
 
         String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
         double data2006 = Double.parseDouble(Database.execute(Query_, "SUM(year_2006)").get(0));
@@ -45,14 +48,8 @@ public class Linechart_Fietsendiefstal {
         series.getData().add(new XYChart.Data("2011", data2011));
 
 
-        Scene scene = new Scene(lineChart, 800, 600);
+        Scene scene = new Scene(lineChart, 1080, 720);
         lineChart.getData().add(series);
-        vbox.getChildren().add(lineChart);
-
-        Label FietsenDiefstalLabel1 = new Label("In deze grafiek staat per jaar hoeveel fietsen er zijn gestolen in de regio Rotterdam.");
-        Label FietsenDiefstalLabel2 = new Label("In 2008 waren de meeste fietsen diefstallen maar in de afgelopen jaren zijn de diefstallen zwaar afgenomen.");
-        vbox.getChildren().addAll(FietsenDiefstalLabel1, FietsenDiefstalLabel2);
-        vbox.setAlignment(Pos.CENTER);
 
         return scene;
 
