@@ -106,8 +106,7 @@ public class Piechart_tasjesdiefstal {
         vbox.getChildren().addAll(children);
 
         Label TasjesDiefstalLabel1 = new Label("In deze grafiek is te zien hoeveel overvallen er zijn geweest met en zonder geweld.");
-        Label TasjesDiefstalLabel2 = new Label("De meeste tasjes diefstel in de regio Rotterdam is zonder geweld.");
-        vbox.getChildren().addAll(TasjesDiefstalLabel1, TasjesDiefstalLabel2);
+        vbox.getChildren().add(TasjesDiefstalLabel1);
         vbox.setAlignment(Pos.CENTER);
 
         borderpane.setBottom(grid);
