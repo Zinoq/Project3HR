@@ -73,7 +73,7 @@ public class Barchart_Tevredenheid {
 
         Scene scene = new Scene(bc,1080, 720);
         bc.getData().addAll(series1, series2, series3, series4, series5);
-        // vbox.getChildren().add(bc);
+         vbox.getChildren().add(bc);
 
         Label TevredenheidLabel1 = new Label("In deze grafiek is de tevredenheid te zien van 5 verschillende wijken.");
         Label TevredenheidLabel2 = new Label("In 2006 en 2007 was de tevredenheid van de bewoners in elke wijk hoger dan tegenwoordig.");

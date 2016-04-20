@@ -75,7 +75,7 @@ public class Main extends Application {
             grafiek2window.showAndWait();
         });
 
-        Label grafiek3label = new Label("Fietsendiefstal per jaar");
+        Label grafiek3label = new Label("Fietsendiefstallen per jaar");
         Button grafiek3 = new Button("Toon Grafiek"); // Linechart_Fietsendiefstal
         grafiek3.setOnAction(e -> {
             grafiek3window = new Stage();
@@ -93,7 +93,7 @@ public class Main extends Application {
             grafiek4window.showAndWait();
         });
 
-        Label grafiek5label = new Label("Hoeveelheid fietsendiefstallen per wijk in 2006");
+        Label grafiek5label = new Label("Fietsendiefstallen per wijk in 2006");
         Button grafiek5 = new Button("Toon Grafiek"); //
         grafiek5.setOnAction(e -> {
             grafiek5window = new Stage();

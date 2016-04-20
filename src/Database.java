@@ -36,8 +36,18 @@ public class Database {
         return Result;
     }
 
-
-
+    public ArrayList<String> newExecute(String Query, String Selector) {
+        try {
+            Statement myStatement = connection.createStatement();
+            ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
+            while (myResultset.next()) { // eigenlijk een soort for loop door de resultaten
+                Result.add(myResultset.getString(Selector));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Result;
+    }
 
     public ArrayList<Double> getMarkerLat() {
         try {

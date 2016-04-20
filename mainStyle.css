@@ -10,6 +10,11 @@
 
 }
 
+.chart {
+    -fx-min-height: 90%;
+    -fx-min-width: 90%;
+}
+
 
 @keyframes example {
     0%   {background-color: red; left:0px; top:0px;}

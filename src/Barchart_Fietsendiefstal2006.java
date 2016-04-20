@@ -19,6 +19,7 @@ public class Barchart_Fietsendiefstal2006 {
         final BarChart<String, Number> barc = new BarChart<String, Number>(xAxis, yAxis);
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Hoeveelheid");
+        barc.setTitle("Fietsendiefstal per wijk in 2006");
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2006");

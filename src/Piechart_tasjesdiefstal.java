@@ -87,7 +87,7 @@ public class Piechart_tasjesdiefstal {
 
         double MetGeweld = Double.parseDouble(Database.execute(Query1.toString(), Selector.toString()).get(0));
         double ZonderGeweld = Double.parseDouble(Database.execute(Query2.toString(), Selector.toString()).get(0));
-        Scene sceneDiefstal = new Scene(borderpane);
+        Scene sceneDiefstal = new Scene(borderpane, 1280, 720);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
