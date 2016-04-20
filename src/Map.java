@@ -1,22 +1,35 @@
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.*;
+import com.lynden.gmapsfx.javascript.object.Animation;
 import com.lynden.gmapsfx.shapes.Circle;
 import com.lynden.gmapsfx.shapes.CircleOptions;
+import javafx.animation.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Map implements MapComponentInitializedListener {
     private GoogleMapView mapView;
     private GoogleMap map;
     Database Database = new Database();
     private ArrayList<Object> MarkerList = new ArrayList<>();
-    AnimationLabel animationLabel = new AnimationLabel();
+
+    private Timeline timeline;
+    private List<String> list = Arrays.asList("Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag");
+    private int i = 0;
+    private int j = 0;
+    private Label daglabel;
 
     private String dag;
     private String plaats;
@@ -50,7 +63,7 @@ public class Map implements MapComponentInitializedListener {
         GridPane.setConstraints(daylabel, 0, 0);
 
         ChoiceBox<String> choiceday = new ChoiceBox<>(); // choisebox days
-        choiceday.getItems().addAll("Zondag","Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag");
+        choiceday.getItems().addAll("Zondag" ,"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag");
         GridPane.setConstraints(choiceday, 1, 0);
         choiceday.setValue("Maandag");
         choiceday.setOnAction(event -> {
@@ -117,22 +130,22 @@ public class Map implements MapComponentInitializedListener {
         Button startbut = new Button("Start animatie");
         GridPane.setConstraints(startbut, 1, 8);
         startbut.setOnAction(event -> {
-            animationLabel.StartAnimation();
-            animationLabel.setVisible(true);
+            StartAnimation();
+            daglabel.setVisible(true);
             System.out.println("start");
         });
 
         Button stopbut = new Button("Stop animatie");
         GridPane.setConstraints(stopbut, 1, 9);
         stopbut.setOnAction(event -> {
-            animationLabel.StopAnimation();
-            animationLabel.setVisible(false);
+            StopAnimation();
+            daglabel.setVisible(false);
             System.out.println("stop");
         });
+        daglabel = new Label("");
+        GridPane.setConstraints(daglabel, 1,10);
 
-        GridPane.setConstraints(animationLabel, 1,10);
-
-        grid.getChildren().addAll(daylabel, choiceday, marklabel, choicemarkt, radlabel, radinput, showBut,removeBut, startbut, stopbut, removeAllbut, showAllbut, animationLabel);
+        grid.getChildren().addAll(daylabel, choiceday, marklabel, choicemarkt, radlabel, radinput, showBut,removeBut, startbut, stopbut, removeAllbut, showAllbut, daglabel);
         labelbox.getChildren().addAll(grid);
 
         VBox mapbox = new VBox(15);
@@ -180,13 +193,14 @@ public class Map implements MapComponentInitializedListener {
 
     //Add a marker to the map.
     public void addMarker() {
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Longitude").get(0)))))
-                        .visible(true);
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Longitude").get(0)))))
+                .visible(true);
 
-                marker = new Marker(markerOptions);
-                map.addMarker(marker);
+        marker = new Marker(markerOptions);
+        map.addMarker(marker);
         }
+
     //Add a marker to the map.
     public void addAllMarkers() {
         for (int i = 0; i < 11; i++) {
@@ -242,6 +256,52 @@ public class Map implements MapComponentInitializedListener {
                 map.addMarker(new Marker(new MarkerOptions().position(new LatLong(Database.getParkeerLat().get(p), Database.getParkeerLong().get(p)))));
             }
         }
+    }
+
+    public void StartAnimation() {
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0),
+                        new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent actionEvent) {
+                                System.out.println(i);
+
+                                if (i == 7) {
+                                    i = 0;
+                                }
+                                daglabel.setText(list.get(i));
+                                if (j >= 1 && !list.get(i).equals("Dinsdag")){
+                                    map.removeMarker(marker);
+                                }
+                                if(!list.get(i).equals("Maandag")) {
+                                        System.out.println(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Latitude").get(0));
+                                        System.out.println(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Longitude").get(0));
+                                        MarkerOptions markerOptions = new MarkerOptions()
+                                                .position(new LatLong(Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Longitude").get(0)))))
+                                                .visible(true);
+
+                                        marker = new Marker(markerOptions);
+                                        map.addMarker(marker);
+                                        System.out.println(marker);
+                                                                    }
+                                System.out.println("i na" + i);
+                                System.out.println("j na" + j);
+                                i++;
+                                j++;
+
+                            }
+
+
+                        }
+                ),
+                new KeyFrame(Duration.seconds(2))
+        );
+        timeline.setCycleCount(javafx.animation.Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    public void StopAnimation() {
+        timeline.stop();
     }
 }
 
