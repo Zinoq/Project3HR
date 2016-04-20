@@ -44,7 +44,6 @@ public class Main extends Application {
         Button mapbut = new Button("Markten Kaart"); // google maps wordt pas geladen als er op de kaart knop geklikt wordt, dit voor veel betere performance bij opstarten
         mapbut.setOnAction(e ->{
             mapwindow = new Stage();
-            mapwindow.getIcons().add(new Image("/path/to/stackoverflow.jpg"));
             mapwindow.setTitle("Map");
             mapwindow.setScene(map.getMapScene());
             mapwindow.showAndWait();
