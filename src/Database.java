@@ -37,7 +37,7 @@ public class Database {
     }
 
     public ArrayList<String> newExecute(String Query, String Selector) {
-        Result.clear();
+//        Result.clear();
         try {
             Statement myStatement = connection.createStatement();
             ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
