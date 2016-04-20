@@ -28,7 +28,6 @@ public class Piechart_tasjesdiefstal {
 
 
     public Scene getSceneDiefstal(Database Database) {
-
         //layout scene
         VBox vbox = new VBox();
         GridPane grid = new GridPane();

@@ -18,9 +18,7 @@ public class Linechart_Fietsendiefstal {
     }
 
     public Scene getSceneFietsendiefstal(Database Database) {
-        VBox vbox = new VBox();
-        BorderPane borderpane = new BorderPane();
-
+        //chart
         String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
         double data2006 = Double.parseDouble(Database.execute(Query_, "SUM(year_2006)").get(0));
         double data2007 = Double.parseDouble(Database.execute(Query_, "SUM(year_2007)").get(0));

@@ -10,7 +10,6 @@ public class Barchart_Fietsendiefstal2006 {
     public Barchart_Fietsendiefstal2006() {}
 
     public Scene getSceneBarchartFietsendiefstal2006(Database Database) {
-
         //chart
         String Query_ = "SELECT wijk, year_2006 FROM slachtofferschap fietsendiefstal GROUP BY wijk;";
 
