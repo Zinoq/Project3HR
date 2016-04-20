@@ -1,17 +1,20 @@
 .root {
 	-fx-font-family: "Roboto", "Sans-Serif";
-	-fx-background-image: url("menu_background.png");
+	-fx-background-image: url("zinos_gay_pattern.png");
 }
 
 .button:hover {
     /*-fx-background-color: #85bee5;*/
     -fx-position: relative;
-
 }
 
 .chart {
     -fx-min-height: 90%;
     -fx-min-width: 90%;
+}
+
+.label {
+    -fx-text-fill: white;
 }
 
 
