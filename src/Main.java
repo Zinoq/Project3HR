@@ -10,8 +10,6 @@ import javafx.scene.control.Label;
  import javafx.scene.image.ImageView;
  import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 
 import java.io.File;
 
@@ -54,7 +52,7 @@ public class Main extends Application {
 
         mainmenu.getChildren().addAll(grafbut, mapbut, quit);
         mainmenu.setAlignment(Pos.CENTER);
-        menuscene = new Scene(mainmenu, 1280, 720);
+        menuscene = new Scene(mainmenu, 640, 640);
 
         // grafieken screen
         VBox grafVbox = new VBox(15); //layout
@@ -77,7 +75,7 @@ public class Main extends Application {
             grafiek2window.showAndWait();
         });
 
-        Label grafiek3label = new Label("Fietsendiefstallen per jaar");
+        Label grafiek3label = new Label("Fietsendiefstal per jaar");
         Button grafiek3 = new Button("Toon Grafiek"); // Linechart_Fietsendiefstal
         grafiek3.setOnAction(e -> {
             grafiek3window = new Stage();
@@ -95,7 +93,7 @@ public class Main extends Application {
             grafiek4window.showAndWait();
         });
 
-        Label grafiek5label = new Label("Fietsendiefstallen per wijk in 2006");
+        Label grafiek5label = new Label("Hoeveelheid fietsendiefstallen per wijk in 2006");
         Button grafiek5 = new Button("Toon Grafiek"); //
         grafiek5.setOnAction(e -> {
             grafiek5window = new Stage();
@@ -109,7 +107,7 @@ public class Main extends Application {
 
         grafVbox.getChildren().addAll(grafiek1label, grafiek1, grafiek2label, grafiek2, grafiek3label,  grafiek3, grafiek4label, grafiek4, grafiek5label, grafiek5, backbut1); // toevoegen aan het spel
         grafVbox.setAlignment(Pos.CENTER);
-        grafscene = new Scene(grafVbox, 1280, 720);
+        grafscene = new Scene(grafVbox, 640, 640);
 
 
         File f = new File("mainStyle.css");
