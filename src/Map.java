@@ -16,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,21 +28,24 @@ public class Map implements MapComponentInitializedListener {
 
     private Timeline timeline;
     private List<String> list = Arrays.asList("Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag");
+    private ArrayList<Object> markerlist = new ArrayList<>();
     private int i = 0;
     private int j = 0;
     private Label daglabel;
 
     private String plaats;
     private int radius;
+    private Boolean animation = false;
+    private Boolean clicked = false;
     private Marker marker;
     private Circle rcircle;
 
     private Scene scene;
 
-    public Button removeAllbut;
-    public Button showAllbut;
-    public Button removeBut;
-    public Button showBut;
+    private Button removeAllbut;
+    private Button showAllbut;
+    private Button removeBut;
+    private Button showBut;
 
     // Constructor
     public Map() {
@@ -73,11 +78,12 @@ public class Map implements MapComponentInitializedListener {
         Label marklabel = new Label("Welke markt zoekt u: "); // label markt
         GridPane.setConstraints(marklabel, 0, 1);
 
-        ChoiceBox<String> choicemarkt = new ChoiceBox<>(); // choisebox markt
+        ChoiceBox<String> choicemarkt = new ChoiceBox<>(); // choicebox markt
         choicemarkt.getItems().addAll("Binnenrotte Centrummarkt", "Boekenmarkt Wijdekerkstraat", "Biologische markt Eendrachtsplein", "Afrikaanderplein Rotterdam Zuid", "Ommoord", "IJsselmonde", "Visserijplein Rotterdam-West", "Alexanderpolder", "Schiebroek", "Overschie", "Zondagsmarkt");
         GridPane.setConstraints(choicemarkt, 1, 1);
         choicemarkt.setValue("Binnenrotte Centrummarkt");
         choicemarkt.setOnAction(event -> {
+            clicked = true;
             plaats = choicemarkt.getValue();
             System.out.println(plaats);
         });
@@ -89,17 +95,19 @@ public class Map implements MapComponentInitializedListener {
         radinput.setPromptText("Voer radius in");
         GridPane.setConstraints(radinput, 1, 2);
 
-        showBut = new Button("Toon markt"); // load map button
+        showBut = new Button("Toon markt"); // show markt button
         GridPane.setConstraints(showBut, 1, 3);
         showBut.setOnAction(event -> {
-            removeBut.setVisible(true);
-            showBut.setVisible(false);
-            isInt(radinput);
-            addCircle();
-            addMarker();
+            if (clicked) {
+                removeBut.setVisible(true);
+                showBut.setVisible(false);
+                isInt(radinput);
+                addCircle();
+                addMarker();
+            }
         });
 
-        removeBut = new Button("Verwijder markt"); // load map button
+        removeBut = new Button("Verwijder markt"); // remove markt button
         GridPane.setConstraints(removeBut, 1, 3);
         removeBut.setVisible(false);
         removeBut.setOnAction(event -> {
@@ -109,50 +117,57 @@ public class Map implements MapComponentInitializedListener {
             removeCircle();
         });
 
-        showAllbut = new Button("Toon alle markten"); // load map button
+        showAllbut = new Button("Toon alle markten"); // show all button
         GridPane.setConstraints(showAllbut, 1, 5);
         showAllbut.setOnAction(event -> {
             addAllMarkers();
-//            showAllbut.setVisible(false);
-//            removeAllbut.setVisible(true);
+            showAllbut.setVisible(false);
+            removeAllbut.setVisible(true);
         });
 
         // TODO: Alle markers verwijderen
 
-//        removeAllbut = new Button("Verwijder alle markten");
-//        removeAllbut.setVisible(false);
-//        GridPane.setConstraints(removeAllbut, 1, 5);
-//        removeAllbut.setOnAction(event -> {
-//            removeAllMarkers();
-//            removeAllbut.setVisible(false);
-//            showAllbut.setVisible(true);
-//        });
+        removeAllbut = new Button("Verwijder alle markten"); // remove all button
+        removeAllbut.setVisible(false);
+        GridPane.setConstraints(removeAllbut, 1, 5);
+        removeAllbut.setOnAction(event -> {
+            removeAllMarkers();
+            removeAllbut.setVisible(false);
+            showAllbut.setVisible(true);
+        });
 
-        Button startbut = new Button("Start animatie");
-        GridPane.setConstraints(startbut, 1, 8);
+        Label animationlabel = new Label("Markt per dag als animatie"); // infolabel animation
+        GridPane.setConstraints(animationlabel, 0, 10);
+
+        Button startbut = new Button("Start animatie"); // start button animation
+        GridPane.setConstraints(startbut, 1, 10);
         startbut.setOnAction(event -> {
+            animation = true;
             StartAnimation();
             daglabel.setVisible(true);
             System.out.println("start");
         });
 
-        Button stopbut = new Button("Stop animatie");
-        GridPane.setConstraints(stopbut, 1, 9);
+        Button stopbut = new Button("Stop animatie"); // stop button animation
+        GridPane.setConstraints(stopbut, 1, 11);
         stopbut.setOnAction(event -> {
-            StopAnimation();
-            daglabel.setVisible(false);
-            System.out.println("stop");
+            if (animation) {
+                StopAnimation();
+                daglabel.setVisible(false);
+                System.out.println("stop");
+                removeMarker();
+                animation = false;
+            }
         });
-        daglabel = new Label("");
-        GridPane.setConstraints(daglabel, 1,10);
+        daglabel = new Label(""); // animated label
+        GridPane.setConstraints(daglabel, 1,12);
 
         // add all buttons and labels to the grid
-        grid.getChildren().addAll(daylabel, marklabel, choicemarkt, radlabel, radinput, showBut,removeBut, startbut, stopbut, showAllbut, daglabel);
+        grid.getChildren().addAll(daylabel, marklabel, choicemarkt, radlabel, radinput, showBut, removeBut, animationlabel, startbut, stopbut, showAllbut, removeAllbut, daglabel);
         labelbox.getChildren().addAll(grid);
 
         // A grid within a vertical box, within a horizontal box, within a stackpane. (same for te map)
         // set the grow of the boxes when resizing the screen
-
         mapbox.setVgrow(mapView, Priority.ALWAYS);
         mapbox.getChildren().addAll(mapView);
 
@@ -180,7 +195,6 @@ public class Map implements MapComponentInitializedListener {
     // initialize the map
     @Override
     public void mapInitialized() {
-
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
 
@@ -211,21 +225,16 @@ public class Map implements MapComponentInitializedListener {
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
                     .visible(true);
-
             Marker marker = new Marker(markerOptions);
+            markerlist.add(marker);
             map.addMarker(marker);
         }
     }
 
     // remove all markers from the map
     public void removeAllMarkers(){
-        for (int i = 1; i < 11; i++) {
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
-                    .visible(true);
-
-            Marker marker = new Marker(markerOptions);
-            map.removeMarker(marker);
+        for (Object i : markerlist) {
+//            map.removeMarker(i);
             }
     }
 
@@ -270,6 +279,7 @@ public class Map implements MapComponentInitializedListener {
                                 // remove the previous marker if there
                                 if (j > 0 && !list.get(i).equals("Dinsdag")){
                                     removeMarker();
+                                    // update the map
                                     int currentZoom = map.getZoom();
                                     map.setZoom( currentZoom - 1 );
                                     map.setZoom( currentZoom );
