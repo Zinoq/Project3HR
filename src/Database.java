@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 
 public class Database {
-    public ArrayList<String> Result = new ArrayList<>();
-    public Connection connection;
-    public ArrayList<Double> XMLong = new ArrayList<>();
-    public ArrayList<Double> YMLat = new ArrayList<>();
-    public ArrayList<Double> XPLong = new ArrayList<>();
-    public ArrayList<Double> YPLat = new ArrayList<>();
+    private ArrayList<String> Result = new ArrayList<>();
+    private Connection connection;
+    private ArrayList<Double> XMLong = new ArrayList<>();
+    private ArrayList<Double> YMLat = new ArrayList<>();
+    private ArrayList<Double> XPLong = new ArrayList<>();
+    private ArrayList<Double> YPLat = new ArrayList<>();
 
     public Database() {
         try {
@@ -36,19 +36,6 @@ public class Database {
         return Result;
     }
 
-    public ArrayList<String> newExecute(String Query, String Selector) {
-//        Result.clear();
-        try {
-            Statement myStatement = connection.createStatement();
-            ResultSet myResultset = myStatement.executeQuery(Query); //met een statement kunnen we sql code runnen, die meegegeven wordt
-            while (myResultset.next()) { // eigenlijk een soort for loop door de resultaten
-                Result.add(myResultset.getString(Selector));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Result;
-    }
 
     public ArrayList<Double> getMarkerLat() {
         try {
@@ -119,13 +106,3 @@ public class Database {
     }
 
 }
-
-//    public static void main(String[] args) {
-//        Database Database = new Database(); // new database object en verbinding met de database maken
-//
-//        String Query_ = "SELECT SUM(year_2006), SUM(year_2007), SUM(year_2008), SUM(year_2009), SUM(year_2011) FROM slachtofferschap_fietsendiefstal;";
-//        System.out.println(Double.parseDouble(Database.execute(Query_, "SUM(year_2006)").get(0)));
-//    }
-//}
-
-
