@@ -1,6 +1,6 @@
 .root {
 	-fx-font-family: "Roboto", "Sans-Serif";
-	-fx-background-image: url("zinos_gay_gradient_also_known_as_gaydient.png");
+	-fx-background-image: url("gradient.png");
 }
 
 .button:hover {
