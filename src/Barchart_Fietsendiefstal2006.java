@@ -13,14 +13,14 @@ public class Barchart_Fietsendiefstal2006 {
         //chart
         String Query_ = "SELECT wijk, year_2006 FROM slachtofferschap fietsendiefstal GROUP BY wijk;";
 
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
+        final CategoryAxis xAxis = new CategoryAxis(); // x as
+        final NumberAxis yAxis = new NumberAxis(); // y as
         final BarChart<String, Number> barc = new BarChart<String, Number>(xAxis, yAxis);
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Hoeveelheid");
         barc.setTitle("Fietsendiefstal per wijk in 2006");
 
-        XYChart.Series series1 = new XYChart.Series();
+        XYChart.Series series1 = new XYChart.Series(); //nieuwe serie en datsa invoegen
         series1.setName("2006");
         series1.getData().add(new XYChart.Data("Stadsdriehoek/C.S. Kwartier", Double.parseDouble(Database.execute("SELECT wijk, year_2006 FROM slachtofferschap_fietsendiefstal WHERE wijk='Stadsdriehoek/C.S. Kwartier';", "year_2006").get(0))));
         series1.getData().add(new XYChart.Data("Oude Westen", Double.parseDouble(Database.execute("SELECT wijk, year_2006 FROM slachtofferschap_fietsendiefstal WHERE wijk='Oude Westen';","year_2006").get(0))));
@@ -32,6 +32,6 @@ public class Barchart_Fietsendiefstal2006 {
         Scene scene = new Scene(barc, 1280, 720);
         barc.getData().addAll(series1);
 
-        return scene;
+        return scene; // de gemaakte scene returnen zodat we die kunnen gebruiken
     }
 }

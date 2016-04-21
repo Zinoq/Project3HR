@@ -119,12 +119,13 @@ public class Piechart_tasjesdiefstal {
                         public void handle(MouseEvent e) {
                             caption.setTranslateX(e.getSceneX());
                             caption.setTranslateY(e.getSceneY());
+                            caption.setAlignment(Pos.CENTER);
                             caption.setText(String.valueOf(data.getPieValue()) + "");
                             caption.setVisible(true);
                         }
                     });
         }
-        return sceneDiefstal;
+        return sceneDiefstal; // return scene so we can use it in main
     }
 }
 

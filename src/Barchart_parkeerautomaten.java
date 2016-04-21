@@ -78,6 +78,6 @@ public class Barchart_parkeerautomaten {
         Scene scene = new Scene(barch, 1280, 720);
         barch.getData().addAll(series1);
 
-        return scene;
+        return scene; // return scene so we can use it in main
     }
 }

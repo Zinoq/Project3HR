@@ -49,7 +49,7 @@ public class Linechart_Fietsendiefstal {
         Scene scene = new Scene(lineChart, 1280, 720);
         lineChart.getData().add(series);
 
-        return scene;
+        return scene; // return scene so we can use it in main
 
     }
 }

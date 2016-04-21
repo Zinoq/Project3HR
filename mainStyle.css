@@ -14,8 +14,8 @@
 }
 
 .label {
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
+    -fx-font-color: black;
+    /*-fx-font-weight: bold;*/
 }
 
 

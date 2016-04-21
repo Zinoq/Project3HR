@@ -29,7 +29,7 @@ public class Barchart_Tevredenheid {
         xAxis.setLabel("Wijken");
         yAxis.setLabel("Percentage");
 
-        XYChart.Series series1 = new XYChart.Series();
+        XYChart.Series series1 = new XYChart.Series(); //hier onder wordt data toegevoegd
         series1.setName("2006");
         series1.getData().add(new XYChart.Data(Stadsdriehoek, Double.parseDouble(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Stadsdriehoek/C.S. Kwartier';", "year_2006").get(0))));
         series1.getData().add(new XYChart.Data(OudeWesten, Double.parseDouble(Database.execute("SELECT year_2006 FROM tevredenheid_met_het_wonen_in_de_buurt WHERE wijk='Oude Westen';", "year_2006").get(0))));
@@ -72,6 +72,6 @@ public class Barchart_Tevredenheid {
         Scene scene = new Scene(bc, 1280, 720);
         bc.getData().addAll(series1, series2, series3, series4, series5);
 
-        return scene;
+        return scene; // return scene so we can use it in main
     }
 }
