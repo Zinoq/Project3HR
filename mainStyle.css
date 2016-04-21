@@ -1,13 +1,11 @@
 .root {
 	-fx-font-family: "Roboto", "Sans-Serif";
-	-fx-background-image: url("zinos_gay_pattern.png"); /*Background image*/
-    -fx-background-size: cover;
+	-fx-background-image: url("zinos_gay_gradient_also_known_as_gaydient.png");
 }
 
 .button:hover {
     /*-fx-background-color: #85bee5;*/
     -fx-position: relative;
-
 }
 
 .chart {
@@ -16,7 +14,8 @@
 }
 
 .label {
-    -fx-text-fill: white; /*Label color*/
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }
 
 
