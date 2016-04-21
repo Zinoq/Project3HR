@@ -14,10 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +25,6 @@ public class Map implements MapComponentInitializedListener {
 
     private Timeline timeline;
     private List<String> list = Arrays.asList("Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag");
-    private ArrayList<Object> markerlist = new ArrayList<>();
     private int i = 0;
     private int j = 0;
     private Label daglabel;
@@ -42,8 +38,6 @@ public class Map implements MapComponentInitializedListener {
 
     private Scene scene;
 
-    private Button removeAllbut;
-    private Button showAllbut;
     private Button removeBut;
     private Button showBut;
 
@@ -71,16 +65,12 @@ public class Map implements MapComponentInitializedListener {
         grid.setVgap(10);
         grid.setHgap(10);
 
-        Label daylabel = new Label("Markten in Rotterdam "); // label days
-        GridPane.setConstraints(daylabel, 0, 0);
-        daylabel.setFont(new Font("Serif", 15));
-
         Label marklabel = new Label("Welke markt zoekt u: "); // label markt
-        GridPane.setConstraints(marklabel, 0, 1);
+        GridPane.setConstraints(marklabel, 0, 0);
 
         ChoiceBox<String> choicemarkt = new ChoiceBox<>(); // choicebox markt
         choicemarkt.getItems().addAll("Binnenrotte Centrummarkt", "Boekenmarkt Wijdekerkstraat", "Biologische markt Eendrachtsplein", "Afrikaanderplein Rotterdam Zuid", "Ommoord", "IJsselmonde", "Visserijplein Rotterdam-West", "Alexanderpolder", "Schiebroek", "Overschie", "Zondagsmarkt");
-        GridPane.setConstraints(choicemarkt, 1, 1);
+        GridPane.setConstraints(choicemarkt, 1, 0);
         choicemarkt.setValue("Binnenrotte Centrummarkt");
         choicemarkt.setOnAction(event -> {
             clicked = true;
@@ -89,11 +79,11 @@ public class Map implements MapComponentInitializedListener {
         });
 
         Label radlabel = new Label("Radius in meter: "); // radius label radius
-        GridPane.setConstraints(radlabel, 0, 2);
+        GridPane.setConstraints(radlabel, 0, 1);
 
         TextField radinput = new TextField();// radius input
         radinput.setPromptText("Voer radius in");
-        GridPane.setConstraints(radinput, 1, 2);
+        GridPane.setConstraints(radinput, 1, 1);
 
         showBut = new Button("Toon markt"); // show markt button
         GridPane.setConstraints(showBut, 1, 3);
@@ -115,25 +105,6 @@ public class Map implements MapComponentInitializedListener {
             showBut.setVisible(true);
             removeMarker();
             removeCircle();
-        });
-
-        showAllbut = new Button("Toon alle markten"); // show all button
-        GridPane.setConstraints(showAllbut, 1, 5);
-        showAllbut.setOnAction(event -> {
-            addAllMarkers();
-            showAllbut.setVisible(false);
-            removeAllbut.setVisible(true);
-        });
-
-        // TODO: Alle markers verwijderen
-
-        removeAllbut = new Button("Verwijder alle markten"); // remove all button
-        removeAllbut.setVisible(false);
-        GridPane.setConstraints(removeAllbut, 1, 5);
-        removeAllbut.setOnAction(event -> {
-            removeAllMarkers();
-            removeAllbut.setVisible(false);
-            showAllbut.setVisible(true);
         });
 
         Label animationlabel = new Label("Markt per dag als animatie"); // infolabel animation
@@ -163,7 +134,7 @@ public class Map implements MapComponentInitializedListener {
         GridPane.setConstraints(daglabel, 1,12);
 
         // add all buttons and labels to the grid
-        grid.getChildren().addAll(daylabel, marklabel, choicemarkt, radlabel, radinput, showBut, removeBut, animationlabel, startbut, stopbut, showAllbut, removeAllbut, daglabel);
+        grid.getChildren().addAll(marklabel, choicemarkt, radlabel, radinput, showBut, removeBut, animationlabel, startbut, stopbut, daglabel);
         labelbox.getChildren().addAll(grid);
 
         // A grid within a vertical box, within a horizontal box, within a stackpane. (same for te map)
@@ -211,7 +182,7 @@ public class Map implements MapComponentInitializedListener {
         map = mapView.createMap(mapOptions);
     }
 
-    //Add one marker to the map.
+    //Add a marker to the map.
     public void addMarker() {
         MarkerOptions markerOptions = new MarkerOptions()
                 .position(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\"","Longitude").get(0)))));
@@ -219,26 +190,7 @@ public class Map implements MapComponentInitializedListener {
         map.addMarker(marker);
         }
 
-    //Add all markers to the map.
-    public void addAllMarkers() {
-        for (int i = 0; i < 11; i++) {
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(new LatLong(Database.getMarkerLat().get(i), Database.getMarkerLong().get(i)))
-                    .visible(true);
-            Marker marker = new Marker(markerOptions);
-            markerlist.add(marker);
-            map.addMarker(marker);
-        }
-    }
-
-    // remove all markers from the map
-    public void removeAllMarkers(){
-        for (Object i : markerlist) {
-//            map.removeMarker(i);
-            }
-    }
-
-    // remove one marker from the map
+    //Remove a marker from the map
     public void removeMarker(){
         map.removeMarker(marker);
     }
