@@ -1,21 +1,21 @@
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.*;
-import com.lynden.gmapsfx.javascript.object.Animation;
 import com.lynden.gmapsfx.shapes.Circle;
 import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class Map implements MapComponentInitializedListener {
     private GoogleMapView mapView;
     private GoogleMap map;
     Database Database = new Database();
-    private ArrayList<Object> MarkerList = new ArrayList<>();
 
     private Timeline timeline;
     private List<String> list = Arrays.asList("Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag");
@@ -31,7 +30,6 @@ public class Map implements MapComponentInitializedListener {
     private int j = 0;
     private Label daglabel;
 
-    private String dag;
     private String plaats;
     private int radius;
     private Marker marker;
@@ -44,32 +42,33 @@ public class Map implements MapComponentInitializedListener {
     public Button removeBut;
     public Button showBut;
 
+    // Constructor
     public Map() {
     }
 
     public Scene getMapScene() {
-        //Create the JavaFX component and set this as a listener so we know when
+        // Set the scene
+
+        // Create the JavaFX component and set this as a listener so we know when
         //the map has been initialized, at which point we can then begin manipulating it.
+        mapView = new GoogleMapView();
+        mapView.addMapInializedListener(this);
+
+        // initialize the stackpane and boxes
         StackPane root = new StackPane();
         HBox hbox = new HBox(30);
-
         VBox labelbox = new VBox(15);
+        VBox mapbox = new VBox(15);
+
+        // initialize the grid
         GridPane grid = new GridPane(); // markten map layout
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(10);
         grid.setHgap(10);
 
-        Label daylabel = new Label("Kies de dag: "); // label days
+        Label daylabel = new Label("Markten in Rotterdam "); // label days
         GridPane.setConstraints(daylabel, 0, 0);
-
-        ChoiceBox<String> choiceday = new ChoiceBox<>(); // choisebox days
-        choiceday.getItems().addAll("Zondag" ,"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag");
-        GridPane.setConstraints(choiceday, 1, 0);
-        choiceday.setValue("Maandag");
-        choiceday.setOnAction(event -> {
-            dag = choiceday.getValue();
-            System.out.println(dag);
-        });
+        daylabel.setFont(new Font("Serif", 15));
 
         Label marklabel = new Label("Welke markt zoekt u: "); // label markt
         GridPane.setConstraints(marklabel, 0, 1);
@@ -114,18 +113,20 @@ public class Map implements MapComponentInitializedListener {
         GridPane.setConstraints(showAllbut, 1, 5);
         showAllbut.setOnAction(event -> {
             addAllMarkers();
-            showAllbut.setVisible(false);
-            removeAllbut.setVisible(true);
+//            showAllbut.setVisible(false);
+//            removeAllbut.setVisible(true);
         });
 
-        removeAllbut = new Button("Verwijder alle markten");
-        removeAllbut.setVisible(false);
-        GridPane.setConstraints(removeAllbut, 1, 5);
-        removeAllbut.setOnAction(event -> {
-            removeAllMarkers();
-            removeAllbut.setVisible(false);
-            showAllbut.setVisible(true);
-        });
+        // TODO: Alle markers verwijderen
+
+//        removeAllbut = new Button("Verwijder alle markten");
+//        removeAllbut.setVisible(false);
+//        GridPane.setConstraints(removeAllbut, 1, 5);
+//        removeAllbut.setOnAction(event -> {
+//            removeAllMarkers();
+//            removeAllbut.setVisible(false);
+//            showAllbut.setVisible(true);
+//        });
 
         Button startbut = new Button("Start animatie");
         GridPane.setConstraints(startbut, 1, 8);
@@ -145,12 +146,13 @@ public class Map implements MapComponentInitializedListener {
         daglabel = new Label("");
         GridPane.setConstraints(daglabel, 1,10);
 
-        grid.getChildren().addAll(daylabel, choiceday, marklabel, choicemarkt, radlabel, radinput, showBut,removeBut, startbut, stopbut, removeAllbut, showAllbut, daglabel);
+        // add all buttons and labels to the grid
+        grid.getChildren().addAll(daylabel, marklabel, choicemarkt, radlabel, radinput, showBut,removeBut, startbut, stopbut, showAllbut, daglabel);
         labelbox.getChildren().addAll(grid);
 
-        VBox mapbox = new VBox(15);
-        mapView = new GoogleMapView();
-        mapView.addMapInializedListener(this);
+        // A grid within a vertical box, within a horizontal box, within a stackpane. (same for te map)
+        // set the grow of the boxes when resizing the screen
+
         mapbox.setVgrow(mapView, Priority.ALWAYS);
         mapbox.getChildren().addAll(mapView);
 
@@ -159,9 +161,11 @@ public class Map implements MapComponentInitializedListener {
         root.getChildren().add(hbox);
         scene = new Scene(root, 1280, 720);
 
+        // return the scene
         return scene;
     }
 
+    // check if radius is an int, if so save in a variable
     private int isInt(TextField input) {
         try {
             radius = Integer.parseInt(input.getText());
@@ -176,9 +180,11 @@ public class Map implements MapComponentInitializedListener {
     // initialize the map
     @Override
     public void mapInitialized() {
+
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
 
+        // center the map in Rotterdam
         mapOptions.center(new LatLong(51.924420, 4.477733))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
@@ -191,17 +197,15 @@ public class Map implements MapComponentInitializedListener {
         map = mapView.createMap(mapOptions);
     }
 
-    //Add a marker to the map.
+    //Add one marker to the map.
     public void addMarker() {
         MarkerOptions markerOptions = new MarkerOptions()
-                .position(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Longitude").get(0)))))
-                .visible(true);
-
+                .position(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\"","Longitude").get(0)))));
         marker = new Marker(markerOptions);
         map.addMarker(marker);
         }
 
-    //Add a marker to the map.
+    //Add all markers to the map.
     public void addAllMarkers() {
         for (int i = 0; i < 11; i++) {
             MarkerOptions markerOptions = new MarkerOptions()
@@ -209,12 +213,11 @@ public class Map implements MapComponentInitializedListener {
                     .visible(true);
 
             Marker marker = new Marker(markerOptions);
-            MarkerList.add(marker);
-            System.out.println(MarkerList.get(i));
             map.addMarker(marker);
         }
     }
 
+    // remove all markers from the map
     public void removeAllMarkers(){
         for (int i = 1; i < 11; i++) {
             MarkerOptions markerOptions = new MarkerOptions()
@@ -226,15 +229,16 @@ public class Map implements MapComponentInitializedListener {
             }
     }
 
+    // remove one marker from the map
     public void removeMarker(){
         map.removeMarker(marker);
-        System.out.println(MarkerList);
     }
 
+    //Add a radius circle to a marker
     public void addCircle() {
-        //Add a radius circle to a marker
         CircleOptions rcircleoptions = new CircleOptions()
-                .center(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\" and Dag= \"" + dag + "\"","Longitude").get(0)))))
+                // center the circle arount the marker
+                .center(new LatLong (Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Plaats= \"" + plaats + "\"", "Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Plaats= \"" + plaats + "\"","Longitude").get(0)))))
                 .radius(radius)
                 .strokeColor("red")
                 .strokeWeight(2)
@@ -244,65 +248,53 @@ public class Map implements MapComponentInitializedListener {
         map.addMapShape(rcircle);
     }
 
+    // remove the circle from the map
     public void removeCircle(){
         map.removeMapShape(rcircle);
     }
 
-    public void addParkeerMarkers() {
-        for (int p = 0; p < 500; p++) {
-            LatLong startpoint = new LatLong(51.922597, 4.484583);
-            double distance = startpoint.distanceFrom(new LatLong(Database.getParkeerLat().get(p), Database.getParkeerLong().get(p)));
-            if (distance < radius) {
-                map.addMarker(new Marker(new MarkerOptions().position(new LatLong(Database.getParkeerLat().get(p), Database.getParkeerLong().get(p)))));
-            }
-        }
-    }
-
+    // start the marker animation
     public void StartAnimation() {
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0),
                         new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent actionEvent) {
-                                System.out.println(i);
-
+                                // reset the i to 0 if all items of the list are done
                                 if (i == 7) {
                                     i = 0;
                                 }
+                                // set the text of the label
                                 daglabel.setText(list.get(i));
-                                if (j >= 1 && !list.get(i).equals("Dinsdag")){
-                                    map.removeMarker(marker);
-                                }
-                                if(!list.get(i).equals("Maandag")) {
-                                        System.out.println(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Latitude").get(0));
-                                        System.out.println(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Longitude").get(0));
-                                        MarkerOptions markerOptions = new MarkerOptions()
-                                                .position(new LatLong(Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Longitude").get(0)))))
-                                                .visible(true);
 
+                                // remove the previous marker if there
+                                if (j > 0 && !list.get(i).equals("Dinsdag")){
+                                    removeMarker();
+                                    int currentZoom = map.getZoom();
+                                    map.setZoom( currentZoom - 1 );
+                                    map.setZoom( currentZoom );
+                                }
+
+                                // add marker if day is not monday
+                                if(!list.get(i).equals("Maandag")) {
+                                        MarkerOptions markerOptions = new MarkerOptions()
+                                                .position(new LatLong(Double.parseDouble(Database.execute("SELECT Latitude FROM standard.markten WHERE Latitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Latitude").get(0)), (Double.parseDouble(Database.execute("SELECT Longitude FROM standard.markten WHERE Longitude IS NOT NULL and Dag= \"" + list.get(i) + "\"", "Longitude").get(0)))));
                                         marker = new Marker(markerOptions);
-                                        map.addMarker(marker);
-                                        System.out.println(marker);
-                                                                    }
-                                System.out.println("i na" + i);
-                                System.out.println("j na" + j);
+                                        map.addMarker(marker);                                                                   }
                                 i++;
                                 j++;
-
                             }
-
-
                         }
                 ),
                 new KeyFrame(Duration.seconds(2))
         );
+        // play the animation indefinite
         timeline.setCycleCount(javafx.animation.Animation.INDEFINITE);
         timeline.play();
     }
 
+    // stop the marker animation
     public void StopAnimation() {
         timeline.stop();
     }
 }
-
-
